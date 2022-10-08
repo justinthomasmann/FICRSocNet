@@ -12,11 +12,11 @@ library(graphlayouts)
 library(ggplot2)
 library(ggforce)
 #read in data####
-#Dissertation Files > Social Network > 2022 FICR Soc. Net Data > 2015-2020 Soc. Net Data ALL > 
+#Dissertation Files > Social Network > 2022 FICR Soc. Net Data > 2015-2020 Soc. Net Data ALL >
 #CSV for R > Global FicrSocNet.csv
 condata <- read.csv("GlobalFicrSocNet.csv", h=TRUE, check.names = FALSE)
 
-sex.attr <- read.csv("2015-2020EdgeAttributesSEXficr.csv", h=TRUE) 
+sex.attr <- read.csv("2015-2020EdgeAttributesSEXficr.csv", h=TRUE)
 
 #df containing id columns 1-3
 ids <- condata[,1:3]
@@ -45,7 +45,7 @@ edge.global <- data.frame(id1 = ids$id1,
 Global.graph <- graph.data.frame(edge.global, directed = FALSE)
 
 #Make it a matrix to create plots (see below where graph.adjacency is used for plots/metrics)
-Global.matrix <- as_adjacency_matrix(Global.graph, type = "both", names = TRUE, 
+Global.matrix <- as_adjacency_matrix(Global.graph, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
 global.adjacency <- graph.adjacency(Global.matrix, mode= "undirected", weighted=TRUE, diag = FALSE)
@@ -64,8 +64,8 @@ summary(global.adjacency)
 #SUBSET BY YEAR####
 #2015####
 
-#df 2015 only 
-c2015 <- Global.SN  %>% 
+#df 2015 only
+c2015 <- Global.SN  %>%
   select(ends_with("15"))
 
 ncol(c2015)
@@ -88,17 +88,17 @@ edge2015 <- data.frame(id1 = ids$id1,
 graph2015 <- graph.data.frame(edge2015, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrix2015 <- as_adjacency_matrix(graph2015, type = "both", names = TRUE, 
+matrix2015 <- as_adjacency_matrix(graph2015, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
 
 
 #write.csv(matrix2015.adj3, "2015 Adjusted FICR matrix.csv")
 
-#2016#### 
+#2016####
 
-#df 2016 only 
-c2016 <- condata %>% 
+#df 2016 only
+c2016 <- condata %>%
   select(ends_with("16"))
 
 ncol(c2016)
@@ -115,15 +115,15 @@ edge2016 <- data.frame(id1 = ids$id1,
 
 graph2016 <- graph.data.frame(edge2016, directed = FALSE)
 
-matrix2016 <- as_adjacency_matrix(graph2016, type = "both", names = TRUE, 
+matrix2016 <- as_adjacency_matrix(graph2016, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
 
 
-#2017#### 
+#2017####
 
-#df 2017 only 
-c2017 <- condata %>% 
+#df 2017 only
+c2017 <- condata %>%
   select(ends_with("17"))
 
 ncol(c2017)
@@ -140,15 +140,15 @@ edge2017 <- data.frame(id1 = ids$id1,
 
 graph2017 <- graph.data.frame(edge2017, directed = FALSE)
 
-matrix2017 <- as_adjacency_matrix(graph2017, type = "both", names = TRUE, 
+matrix2017 <- as_adjacency_matrix(graph2017, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
 
 
-#2018#### 
+#2018####
 
-#df 2018 only 
-c2018 <- condata %>% 
+#df 2018 only
+c2018 <- condata %>%
   select(ends_with("18"))
 
 ncol(c2018)
@@ -165,13 +165,13 @@ edge2018 <- data.frame(id1 = ids$id1,
 
 graph2018 <- graph.data.frame(edge2018, directed = FALSE)
 
-matrix2018 <- as_adjacency_matrix(graph2018, type = "both", names = TRUE, 
+matrix2018 <- as_adjacency_matrix(graph2018, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
-#2019#### 
+#2019####
 
-#df 2019 only 
-c2019 <- condata %>% 
+#df 2019 only
+c2019 <- condata %>%
   select(ends_with("19"))
 
 ncol(c2019)
@@ -188,13 +188,13 @@ edge2019 <- data.frame(id1 = ids$id1,
 
 graph2019 <- graph.data.frame(edge2019, directed = FALSE)
 
-matrix2019 <- as_adjacency_matrix(graph2019, type = "both", names = TRUE, 
+matrix2019 <- as_adjacency_matrix(graph2019, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
-#2020#### 
+#2020####
 
-#df 2020 only 
-c2020 <- condata %>% 
+#df 2020 only
+c2020 <- condata %>%
   select(ends_with("20"))
 
 ncol(c2020)
@@ -211,7 +211,7 @@ edge2020 <- data.frame(id1 = ids$id1,
 
 graph2020 <- graph.data.frame(edge2020, directed = FALSE)
 
-matrix2020 <- as_adjacency_matrix(graph2020, type = "both", names = TRUE, 
+matrix2020 <- as_adjacency_matrix(graph2020, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
 
@@ -219,7 +219,7 @@ matrix2020 <- as_adjacency_matrix(graph2020, type = "both", names = TRUE,
 
 #January####
 
-cJan <- condata %>% 
+cJan <- condata %>%
   select(starts_with("1/"))
 
 ncol(cJan)
@@ -235,12 +235,12 @@ edgeJan <- data.frame(id1 = ids$id1,
 
 graphJan <- graph.data.frame(edgeJan, directed = FALSE)
 
-matrixJan <- as_adjacency_matrix(graphJan, type = "both", names = TRUE, 
+matrixJan <- as_adjacency_matrix(graphJan, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
 #February####
 
-cFeb <- condata %>% 
+cFeb <- condata %>%
   select(starts_with("2"))
 ncol(cFeb)
 #28
@@ -256,11 +256,11 @@ edgeFeb <- data.frame(id1 = ids$id1,
 
 graphFeb <- graph.data.frame(edgeFeb, directed = FALSE)
 
-matrixFeb <- as_adjacency_matrix(graphFeb, type = "both", names = TRUE, 
+matrixFeb <- as_adjacency_matrix(graphFeb, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 #March####
 
-cMar <- condata %>% 
+cMar <- condata %>%
   select(starts_with("3"))
 ncol(cMar)
 #40
@@ -275,11 +275,11 @@ edgeMar <- data.frame(id1 = ids$id1,
 
 graphMar <- graph.data.frame(edgeMar, directed = FALSE)
 
-matrixMar <- as_adjacency_matrix(graphMar, type = "both", names = TRUE, 
+matrixMar <- as_adjacency_matrix(graphMar, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 #April####
 
-cApr <- condata %>% 
+cApr <- condata %>%
   select(starts_with("4"))
 ncol(cApr)
 #23
@@ -294,12 +294,12 @@ edgeApr <- data.frame(id1 = ids$id1,
 
 graphApr <- graph.data.frame(edgeApr, directed = FALSE)
 
-matrixApr <- as_adjacency_matrix(graphApr, type = "both", names = TRUE, 
+matrixApr <- as_adjacency_matrix(graphApr, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #May####
 
-cMay <- condata %>% 
+cMay <- condata %>%
   select(starts_with("5"))
 
 ncol(cMay)
@@ -315,12 +315,12 @@ edgeMay <- data.frame(id1 = ids$id1,
 
 graphMay <- graph.data.frame(edgeMay, directed = FALSE)
 
-matrixMay <- as_adjacency_matrix(graphMay, type = "both", names = TRUE, 
+matrixMay <- as_adjacency_matrix(graphMay, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #June####
 
-cJun <- condata %>% 
+cJun <- condata %>%
   select(starts_with("6"))
 
 ncol(cJun)
@@ -336,12 +336,12 @@ edgeJun <- data.frame(id1 = ids$id1,
 
 graphJun <- graph.data.frame(edgeJun, directed = FALSE)
 
-matrixJun <- as_adjacency_matrix(graphJun, type = "both", names = TRUE, 
+matrixJun <- as_adjacency_matrix(graphJun, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #July####
 
-cJul <- condata %>% 
+cJul <- condata %>%
   select(starts_with("7"))
 ncol(cJul)
 #25
@@ -356,12 +356,12 @@ edgeJul <- data.frame(id1 = ids$id1,
 
 graphJul <- graph.data.frame(edgeJul, directed = FALSE)
 
-matrixJul <- as_adjacency_matrix(graphJul, type = "both", names = TRUE, 
+matrixJul <- as_adjacency_matrix(graphJul, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #August####
 
-cAug <- condata %>% 
+cAug <- condata %>%
   select(starts_with("8"))
 ncol(cAug)
 #50
@@ -376,12 +376,12 @@ edgeAug <- data.frame(id1 = ids$id1,
 
 graphAug <- graph.data.frame(edgeAug, directed = FALSE)
 
-matrixAug <- as_adjacency_matrix(graphAug, type = "both", names = TRUE, 
+matrixAug <- as_adjacency_matrix(graphAug, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #September####
 
-cSep <- condata %>% 
+cSep <- condata %>%
   select(starts_with("9"))
 ncol(cSep)
 #43
@@ -396,12 +396,12 @@ edgeSep <- data.frame(id1 = ids$id1,
 
 graphSep <- graph.data.frame(edgeSep, directed = FALSE)
 
-matrixSep <- as_adjacency_matrix(graphSep, type = "both", names = TRUE, 
+matrixSep <- as_adjacency_matrix(graphSep, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #October####
 
-cOct <- condata %>% 
+cOct <- condata %>%
   select(starts_with("10"))
 ncol(cOct)
 #46
@@ -416,12 +416,12 @@ edgeOct <- data.frame(id1 = ids$id1,
 
 graphOct <- graph.data.frame(edgeOct, directed = FALSE)
 
-matrixOct <- as_adjacency_matrix(graphOct, type = "both", names = TRUE, 
+matrixOct <- as_adjacency_matrix(graphOct, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #November####
 
-cNov <- condata %>% 
+cNov <- condata %>%
   select(starts_with("11"))
 ncol(cNov)
 #37
@@ -436,12 +436,12 @@ edgeNov <- data.frame(id1 = ids$id1,
 
 graphNov <- graph.data.frame(edgeNov, directed = FALSE)
 
-matrixNov <- as_adjacency_matrix(graphNov, type = "both", names = TRUE, 
+matrixNov <- as_adjacency_matrix(graphNov, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 #December####
 
-cDec <- condata %>% 
+cDec <- condata %>%
   select(starts_with("12"))
 ncol(cDec)
 #37
@@ -457,7 +457,7 @@ edgeDec <- data.frame(id1 = ids$id1,
 
 graphDec <- graph.data.frame(edgeDec, directed = FALSE)
 
-matrixDec <- as_adjacency_matrix(graphDec, type = "both", names = TRUE, 
+matrixDec <- as_adjacency_matrix(graphDec, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 
@@ -481,7 +481,7 @@ edgeBreeding <- data.frame(id1 = ids$id1,
 
 graphBreeding <- graph.data.frame(edgeBreeding, directed = FALSE)
 
-matrixBreeding <- as_adjacency_matrix(graphBreeding, type = "both", names = TRUE, 
+matrixBreeding <- as_adjacency_matrix(graphBreeding, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
 
@@ -503,7 +503,7 @@ edgeNonbreeding <- data.frame(id1 = ids$id1,
 
 graphNonbreeding <- graph.data.frame(edgeNonbreeding, directed = FALSE)
 
-matrixNonbreeding <- as_adjacency_matrix(graphNonbreeding, type = "both", names = TRUE, 
+matrixNonbreeding <- as_adjacency_matrix(graphNonbreeding, type = "both", names = TRUE,
                                       sparse = FALSE, attr = "weight")
 
 #Winter (Dec-Mar)####
@@ -525,7 +525,7 @@ edgeWinter <- data.frame(id1 = ids$id1,
 
 graphWinter <- graph.data.frame(edgeWinter, directed = FALSE)
 
-matrixWinter <- as_adjacency_matrix(graphWinter, type = "both", names = TRUE, 
+matrixWinter <- as_adjacency_matrix(graphWinter, type = "both", names = TRUE,
                                     sparse = FALSE, attr = "weight")
 
 
@@ -539,8 +539,8 @@ matrixWinter <- as_adjacency_matrix(graphWinter, type = "both", names = TRUE,
 #2015 SUBSETTED BY SEASON#####
 #2015 Breeding Season
 
-#df 2015 Breeding season only 
-c2015 <- condata %>% 
+#df 2015 Breeding season only
+c2015 <- condata %>%
   select(ends_with("15"))
 
 
@@ -567,7 +567,7 @@ edgeBreed2015 <- data.frame(id1 = ids$id1,
 graphBreed2015 <- graph.data.frame(edgeBreed2015, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixBreed2015 <- as_adjacency_matrix(graphBreed2015, type = "both", names = TRUE, 
+matrixBreed2015 <- as_adjacency_matrix(graphBreed2015, type = "both", names = TRUE,
                                        sparse = FALSE, attr = "weight")
 
 #2015 Nonbreeding season
@@ -595,7 +595,7 @@ edgeNonbreed2015 <- data.frame(id1 = ids$id1,
 graphNonbreed2015 <- graph.data.frame(edgeNonbreed2015, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixNonbreed2015 <- as_adjacency_matrix(graphNonbreed2015, type = "both", names = TRUE, 
+matrixNonbreed2015 <- as_adjacency_matrix(graphNonbreed2015, type = "both", names = TRUE,
                                           sparse = FALSE, attr = "weight")
 
 #write.csv(matrix2015.adj3, "2015 Adjusted FICR matrix.csv")
@@ -625,7 +625,7 @@ edgeWinter2015 <- data.frame(id1 = ids$id1,
 graphWinter2015 <- graph.data.frame(edgeWinter2015, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixWinter2015 <- as_adjacency_matrix(graphWinter2015, type = "both", names = TRUE, 
+matrixWinter2015 <- as_adjacency_matrix(graphWinter2015, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
 
@@ -635,8 +635,8 @@ matrixWinter2015 <- as_adjacency_matrix(graphWinter2015, type = "both", names = 
 
 
 #2016 SUBSETTED BY SEASON####
-#df 2016 Breeding season only 
-c2016 <- condata %>% 
+#df 2016 Breeding season only
+c2016 <- condata %>%
   select(ends_with("16"))
 
 #2016 Breeding Season
@@ -666,7 +666,7 @@ edgeBreed2016 <- data.frame(id1 = ids$id1,
 graphBreed2016 <- graph.data.frame(edgeBreed2016, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixBreed2016 <- as_adjacency_matrix(graphBreed2016, type = "both", names = TRUE, 
+matrixBreed2016 <- as_adjacency_matrix(graphBreed2016, type = "both", names = TRUE,
                                        sparse = FALSE, attr = "weight")
 
 
@@ -698,7 +698,7 @@ edgeNonbreed2016 <- data.frame(id1 = ids$id1,
 graphNonbreed2016 <- graph.data.frame(edgeNonbreed2016, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixNonbreed2016 <- as_adjacency_matrix(graphNonbreed2016, type = "both", names = TRUE, 
+matrixNonbreed2016 <- as_adjacency_matrix(graphNonbreed2016, type = "both", names = TRUE,
                                           sparse = FALSE, attr = "weight")
 
 #write.csv(matrix2016.adj3, "2016 Adjusted FICR matrix.csv")
@@ -728,13 +728,13 @@ edgeWinter2016 <- data.frame(id1 = ids$id1,
 graphWinter2016 <- graph.data.frame(edgeWinter2016, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixWinter2016 <- as_adjacency_matrix(graphWinter2016, type = "both", names = TRUE, 
+matrixWinter2016 <- as_adjacency_matrix(graphWinter2016, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
 
 #2017 SUBSETTED BY SEASON####
-#df 2017 Breeding season only 
-c2017 <- condata %>% 
+#df 2017 Breeding season only
+c2017 <- condata %>%
   select(ends_with("17"))
 
 #2017 Breeding Season
@@ -764,7 +764,7 @@ edgeBreed2017 <- data.frame(id1 = ids$id1,
 graphBreed2017 <- graph.data.frame(edgeBreed2017, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixBreed2017 <- as_adjacency_matrix(graphBreed2017, type = "both", names = TRUE, 
+matrixBreed2017 <- as_adjacency_matrix(graphBreed2017, type = "both", names = TRUE,
                                        sparse = FALSE, attr = "weight")
 
 #2017 Nonbreeding season
@@ -792,7 +792,7 @@ edgeNonbreed2017 <- data.frame(id1 = ids$id1,
 graphNonbreed2017 <- graph.data.frame(edgeNonbreed2017, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixNonbreed2017 <- as_adjacency_matrix(graphNonbreed2017, type = "both", names = TRUE, 
+matrixNonbreed2017 <- as_adjacency_matrix(graphNonbreed2017, type = "both", names = TRUE,
                                           sparse = FALSE, attr = "weight")
 
 #2017 Winter Season
@@ -820,12 +820,12 @@ edgeWinter2017 <- data.frame(id1 = ids$id1,
 graphWinter2017 <- graph.data.frame(edgeWinter2017, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixWinter2017 <- as_adjacency_matrix(graphWinter2017, type = "both", names = TRUE, 
+matrixWinter2017 <- as_adjacency_matrix(graphWinter2017, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
 #2018 SUBSETTED BY SEASON####
-#df 2018 Breeding season only 
-c2018 <- condata %>% 
+#df 2018 Breeding season only
+c2018 <- condata %>%
   select(ends_with("18"))
 
 #2018 Breeding Season
@@ -853,7 +853,7 @@ edgeBreed2018 <- data.frame(id1 = ids$id1,
 graphBreed2018 <- graph.data.frame(edgeBreed2018, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixBreed2018 <- as_adjacency_matrix(graphBreed2018, type = "both", names = TRUE, 
+matrixBreed2018 <- as_adjacency_matrix(graphBreed2018, type = "both", names = TRUE,
                                        sparse = FALSE, attr = "weight")
 
 #2018 Nonbreeding season
@@ -881,7 +881,7 @@ edgeNonbreed2018 <- data.frame(id1 = ids$id1,
 graphNonbreed2018 <- graph.data.frame(edgeNonbreed2018, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixNonbreed2018 <- as_adjacency_matrix(graphNonbreed2018, type = "both", names = TRUE, 
+matrixNonbreed2018 <- as_adjacency_matrix(graphNonbreed2018, type = "both", names = TRUE,
                                           sparse = FALSE, attr = "weight")
 
 #2018 Winter Season
@@ -909,12 +909,12 @@ edgeWinter2018 <- data.frame(id1 = ids$id1,
 graphWinter2018 <- graph.data.frame(edgeWinter2018, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixWinter2018 <- as_adjacency_matrix(graphWinter2018, type = "both", names = TRUE, 
+matrixWinter2018 <- as_adjacency_matrix(graphWinter2018, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
 #2019 SUBSETTED BY SEASON####
-#df 2019 Breeding season only 
-c2019 <- condata %>% 
+#df 2019 Breeding season only
+c2019 <- condata %>%
   select(ends_with("19"))
 
 #2019 Breeding Season
@@ -942,7 +942,7 @@ edgeBreed2019 <- data.frame(id1 = ids$id1,
 graphBreed2019 <- graph.data.frame(edgeBreed2019, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixBreed2019 <- as_adjacency_matrix(graphBreed2019, type = "both", names = TRUE, 
+matrixBreed2019 <- as_adjacency_matrix(graphBreed2019, type = "both", names = TRUE,
                                        sparse = FALSE, attr = "weight")
 
 #2019 Nonbreeding season
@@ -970,7 +970,7 @@ edgeNonbreed2019 <- data.frame(id1 = ids$id1,
 graphNonbreed2019 <- graph.data.frame(edgeNonbreed2019, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixNonbreed2019 <- as_adjacency_matrix(graphNonbreed2019, type = "both", names = TRUE, 
+matrixNonbreed2019 <- as_adjacency_matrix(graphNonbreed2019, type = "both", names = TRUE,
                                           sparse = FALSE, attr = "weight")
 
 #2019 Winter Season
@@ -998,14 +998,14 @@ edgeWinter2019 <- data.frame(id1 = ids$id1,
 graphWinter2019 <- graph.data.frame(edgeWinter2019, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixWinter2019 <- as_adjacency_matrix(graphWinter2019, type = "both", names = TRUE, 
+matrixWinter2019 <- as_adjacency_matrix(graphWinter2019, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
 
 
 #2020 SUBSETTED BY SEASON####
-#df 2020 Breeding season only 
-c2020 <- condata %>% 
+#df 2020 Breeding season only
+c2020 <- condata %>%
   select(ends_with("20"))
 
 #2020 Breeding Season
@@ -1034,7 +1034,7 @@ which.max(edgeBreed2020$weight)
 graphBreed2020 <- graph.data.frame(edgeBreed2020, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixBreed2020 <- as_adjacency_matrix(graphBreed2020, type = "both", names = TRUE, 
+matrixBreed2020 <- as_adjacency_matrix(graphBreed2020, type = "both", names = TRUE,
                                        sparse = FALSE, attr = "weight")
 
 #2020 Nonbreeding season
@@ -1062,7 +1062,7 @@ edgeNonbreed2020 <- data.frame(id1 = ids$id1,
 graphNonbreed2020 <- graph.data.frame(edgeNonbreed2020, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixNonbreed2020 <- as_adjacency_matrix(graphNonbreed2020, type = "both", names = TRUE, 
+matrixNonbreed2020 <- as_adjacency_matrix(graphNonbreed2020, type = "both", names = TRUE,
                                           sparse = FALSE, attr = "weight")
 
 #2020 Winter Season
@@ -1090,14 +1090,14 @@ edgeWinter2020 <- data.frame(id1 = ids$id1,
 graphWinter2020 <- graph.data.frame(edgeWinter2020, directed = FALSE)
 
 #Make it a matrix to create plots and calculate metrics from older script
-matrixWinter2020 <- as_adjacency_matrix(graphWinter2020, type = "both", names = TRUE, 
+matrixWinter2020 <- as_adjacency_matrix(graphWinter2020, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
 
 #Network Calculations####
 ###################################REMOVING ANY ISOLATED EDGES (0) TIES##########################################
 #GLOBAL####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 Global <- edge.global
 
 Global.1 <- Global %>%
@@ -1106,7 +1106,7 @@ Global.1 <- Global %>%
 #same for adjusted 3 up-make it a data frame
 Globgraph.1 <- graph.data.frame(Global.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 Glob.Matrix1 <- as_adjacency_matrix(Globgraph.1, type = "both", names = TRUE,
                                     sparse = FALSE, attr = "weight")
 
@@ -1128,7 +1128,7 @@ gorder(Glob.Matrix1)
 gsize(Glob.Matrix1)
 # 292
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeGlobal <- degree(Glob.Matrix1)
 mean(degreeGlobal)
 #19.46667
@@ -1138,7 +1138,7 @@ mean(degreeGlobal)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(Glob.Matrix1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeGlobal, 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeGlobal,
                                                                                color = factor(Sex))) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
   theme_void() + ggtitle("Glob.Matrix1") +
@@ -1157,7 +1157,7 @@ melt(strength.Global)%>%
   arrange(desc(strength.Global))
 #HN_NET115  1028
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessGlobal <- closeness(Glob.Matrix1, vids = V(Glob.Matrix1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1178,9 +1178,9 @@ gGlobal.ec <- eigen_centrality(Glob.Matrix1, directed = FALSE)
 mean(gGlobal.ec$vector)
 #0.4540158
 
-which.max(gGlobal.ec$vector) 
-#HN_NET115 
-#13 
+which.max(gGlobal.ec$vector)
+#HN_NET115
+#13
 
 
 ##Network Diameter
@@ -1213,27 +1213,32 @@ mean_distance(Glob.Matrix1)
 
 #2015 METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.2015.1 <- edge2015
 
 #Testing join#####
-edge.2015.1sex <- inner_join(sex.attr, edge.2015.1, by = "id1")
-
-
+#join has to happen after filtering weights
 edge.2015.1 <- edge.2015.1 %>%
   filter(weight >= 1)
+
+edge.2015.1sex <- inner_join(sex.attr, edge.2015.1, by = "id1")
+edge.2015.1sex <- edge.2015.1sex[,1:2]
+
+
+
 
 #same for adjusted 3 up-make it a data frame
 graph.2015.1 <- graph.data.frame(edge.2015.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.2015.1 <- as_adjacency_matrix(graph.2015.1, type = "both", names = TRUE,
                                 sparse = FALSE, attr = "weight")
 
 #make it an igraph object
 g.2015.1 <- graph.adjacency(g.2015.1, mode= "undirected", weighted=TRUE, diag = FALSE)
-V(g.2015.1)
+V(g.2015.1)$sex=factor(edge.2015.1sex[match(V(g.2015.1)$id1,edge.2015.1sex$name),"Sex"])
 
+#we need to remove duplicates from the sex df
 
 ##Number of Nodes
 gorder(g.2015.1)
@@ -1243,7 +1248,7 @@ gorder(g.2015.1)
 gsize(g.2015.1)
 #89
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree2015 <- degree(g.2015.1)
 mean(degree2015)
 #11.86667
@@ -1253,7 +1258,7 @@ mean(degree2015)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.2015.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2015), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2015),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1273,7 +1278,7 @@ melt(strength.2015)%>%
   arrange(desc(strength.2015))
 #78_NET214    86
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness2015 <- closeness(g.2015.1, vids = V(g.2015.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1294,9 +1299,9 @@ g2015.ec <- eigen_centrality(g.2015.1, directed = FALSE)
 mean(g2015.ec$vector)
 #0.5511107
 
-which.max(g2015.ec$vector) 
-#78_NET214 
-#2 
+which.max(g2015.ec$vector)
+#78_NET214
+#2
 
 
 ##Network Diameter
@@ -1327,7 +1332,7 @@ mean_distance(g.2015.1)
 #1.152381
 #2016 METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.2016.1 <- edge2016
 
 edge.2016.1 <- edge.2016.1 %>%
@@ -1336,7 +1341,7 @@ edge.2016.1 <- edge.2016.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.2016.1 <- graph.data.frame(edge.2016.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.2016.1 <- as_adjacency_matrix(graph.2016.1, type = "both", names = TRUE,
                                 sparse = FALSE, attr = "weight")
 
@@ -1353,7 +1358,7 @@ gorder(g.2016.1)
 gsize(g.2016.1)
 #130
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree2016 <- degree(g.2016.1)
 mean(degree2016)
 #15.29412
@@ -1363,7 +1368,7 @@ mean(degree2016)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.2016.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2016), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2016),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1383,7 +1388,7 @@ melt(strength.2016)%>%
   arrange(desc(strength.2016))
 #AU_NET115   161
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness2016 <- closeness(g.2016.1, vids = V(g.2016.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1404,9 +1409,9 @@ g2016.ec <- eigen_centrality(g.2016.1, directed = FALSE)
 mean(g2016.ec$vector)
 #0.5410151
 
-which.max(g2016.ec$vector) 
-#AU_NET115 
-#4 
+which.max(g2016.ec$vector)
+#AU_NET115
+#4
 
 
 ##Network Diameter
@@ -1439,7 +1444,7 @@ mean_distance(g.2016.1)
 
 
 #2017 METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.2017.1 <- edge2017
 
 edge.2017.1 <- edge.2017.1 %>%
@@ -1448,7 +1453,7 @@ edge.2017.1 <- edge.2017.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.2017.1 <- graph.data.frame(edge.2017.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.2017.1 <- as_adjacency_matrix(graph.2017.1, type = "both", names = TRUE,
                                 sparse = FALSE, attr = "weight")
 
@@ -1463,7 +1468,7 @@ gorder(g.2017.1)
 gsize(g.2017.1)
 # 213
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree2017 <- degree(g.2017.1)
 mean(degree2017)
 #19.36364
@@ -1473,7 +1478,7 @@ mean(degree2017)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.2017.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2017), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2017),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1493,7 +1498,7 @@ melt(strength.2017)%>%
   arrange(desc(strength.2017))
 #IH_NET116   538
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness2017 <- closeness(g.2017.1, vids = V(g.2017.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1514,8 +1519,8 @@ g2017.ec <- eigen_centrality(g.2017.1, directed = FALSE)
 mean(g2017.ec$vector)
 #0.6644328
 
-which.max(g2017.ec$vector) 
-#IH_NET116 
+which.max(g2017.ec$vector)
+#IH_NET116
 #11
 
 
@@ -1546,7 +1551,7 @@ distances(g.2017.1)
 mean_distance(g.2017.1)
 #1.077922
 #2018 METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.2018.1 <- edge2018
 
 edge.2018.1 <- edge.2018.1 %>%
@@ -1555,7 +1560,7 @@ edge.2018.1 <- edge.2018.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.2018.1 <- graph.data.frame(edge.2018.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.2018.1 <- as_adjacency_matrix(graph.2018.1, type = "both", names = TRUE,
                                 sparse = FALSE, attr = "weight")
 
@@ -1570,7 +1575,7 @@ gorder(g.2018.1)
 gsize(g.2018.1)
 #133
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree2018 <- degree(g.2018.1)
 mean(degree2018)
 # 14.77778
@@ -1580,7 +1585,7 @@ mean(degree2018)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.2018.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2018), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2018),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1600,7 +1605,7 @@ melt(strength.2018)%>%
   arrange(desc(strength.2018))
 #ZM_SAND17   322
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness2018 <- closeness(g.2018.1, vids = V(g.2018.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1621,9 +1626,9 @@ g.2018.ec <- eigen_centrality(g.2018.1, directed = FALSE)
 mean(g.2018.ec$vector)
 #0.5212233
 
-which.max(g.2018.ec$vector) 
-#ZM_SAND17 
-#17 
+which.max(g.2018.ec$vector)
+#ZM_SAND17
+#17
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -1652,7 +1657,7 @@ distances(g.2018.1)
 mean_distance(g.2018.1)
 #1.130719
 #2019 METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.2019.1 <- edge2019
 
 edge.2019.1 <- edge.2019.1 %>%
@@ -1661,7 +1666,7 @@ edge.2019.1 <- edge.2019.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.2019.1 <- graph.data.frame(edge.2019.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.2019.1 <- as_adjacency_matrix(graph.2019.1, type = "both", names = TRUE,
                                 sparse = FALSE, attr = "weight")
 
@@ -1676,7 +1681,7 @@ gorder(g.2019.1)
 gsize(g.2019.1)
 #66
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree2019 <- degree(g.2019.1)
 mean(degree2019)
 #9.428571
@@ -1686,7 +1691,7 @@ mean(degree2019)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.2019.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2019), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2019),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1706,7 +1711,7 @@ melt(strength.2019)%>%
   arrange(desc(strength.2019))
 #ZM_SAND17   164
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness2019 <- closeness(g.2019.1, vids = V(g.2019.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1727,9 +1732,9 @@ g.2019.ec <- eigen_centrality(g.2019.1, directed = FALSE)
 mean(g.2019.ec$vector)
 #0.5213772
 
-which.max(g.2019.ec$vector) 
-#ZM_SAND17 
-#13 
+which.max(g.2019.ec$vector)
+#ZM_SAND17
+#13
 
 
 ##Network Diameter
@@ -1759,7 +1764,7 @@ distances(g.2019.1)
 mean_distance(g.2019.1)
 #1.274725
 #2020 METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.2020.1 <- edge2020
 
 edge.2020.1 <- edge.2020.1 %>%
@@ -1768,7 +1773,7 @@ edge.2020.1 <- edge.2020.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.2020.1 <- graph.data.frame(edge.2020.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.2020.1 <- as_adjacency_matrix(graph.2020.1, type = "both", names = TRUE,
                                 sparse = FALSE, attr = "weight")
 
@@ -1783,7 +1788,7 @@ gorder(g.2020.1)
 gsize(g.2020.1)
 #21
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree2020 <- degree(g.2020.1)
 mean(degree2020)
 #6
@@ -1793,7 +1798,7 @@ mean(degree2020)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.2020.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2020), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree2020),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1813,7 +1818,7 @@ melt(strength.2020)%>%
   arrange(desc(strength.2020))
 #SY_NET217    47
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness2020 <- closeness(g.2020.1, vids = V(g.2020.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1834,9 +1839,9 @@ g.2020.ec <- eigen_centrality(g.2020.1, directed = FALSE)
 mean(g.2020.ec$vector)
 #0.8023067
 
-which.max(g.2020.ec$vector) 
-#SY_NET217 
-#5 
+which.max(g.2020.ec$vector)
+#SY_NET217
+#5
 
 
 ##Network Diameter
@@ -1870,7 +1875,7 @@ mean_distance(g.2020.1)
 
 
 #JANUARY METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Jan.1 <- edgeJan
 
 edge.Jan.1 <- edge.Jan.1 %>%
@@ -1879,7 +1884,7 @@ edge.Jan.1 <- edge.Jan.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Jan.1 <- graph.data.frame(edge.Jan.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Jan.1 <- as_adjacency_matrix(graph.Jan.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -1894,7 +1899,7 @@ gorder(g.Jan.1)
 gsize(g.Jan.1)
 #117
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeJan <- degree(g.Jan.1)
 mean(degreeJan)
 #11.7
@@ -1904,7 +1909,7 @@ mean(degreeJan)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Jan.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJan), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJan),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -1924,7 +1929,7 @@ melt(strength.Jan)%>%
   arrange(desc(strength.Jan))
 #HN_NET115    31
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessJan <- closeness(g.Jan.1, vids = V(g.Jan.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -1945,9 +1950,9 @@ g.Jan.ec <- eigen_centrality(g.Jan.1, directed = FALSE)
 mean(g.Jan.ec$vector)
 # 0.5430588
 
-which.max(g.Jan.ec$vector) 
-#KO_NET215 
-#12 
+which.max(g.Jan.ec$vector)
+#KO_NET215
+#12
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -1977,7 +1982,7 @@ mean_distance(g.Jan.1)
 #1.394737
 
 #FEBRUARY METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Feb.1 <- edgeFeb
 
 edge.Feb.1 <- edge.Feb.1 %>%
@@ -1986,7 +1991,7 @@ edge.Feb.1 <- edge.Feb.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Feb.1 <- graph.data.frame(edge.Feb.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Feb.1 <- as_adjacency_matrix(graph.Feb.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2002,7 +2007,7 @@ gorder(g.Feb.1)
 gsize(g.Feb.1)
 #135
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeFeb <- degree(g.Feb.1)
 mean(degreeFeb)
 #12.85714
@@ -2012,7 +2017,7 @@ mean(degreeFeb)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Feb.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeFeb), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeFeb),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2032,7 +2037,7 @@ melt(strength.Feb)%>%
   arrange(desc(strength.Feb))
 #HN_NET115    71
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessFeb <- closeness(g.Feb.1, vids = V(g.Feb.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2053,8 +2058,8 @@ g.Feb.ec <- eigen_centrality(g.Feb.1, directed = FALSE)
 mean(g.Feb.ec$vector)
 #0.517305
 
-which.max(g.Feb.ec$vector) 
-#KO_NET215 
+which.max(g.Feb.ec$vector)
+#KO_NET215
 #13
 
 
@@ -2087,7 +2092,7 @@ mean_distance(g.Feb.1)
 
 #MARCH METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Mar.1 <- edgeMar
 
 edge.Mar.1 <- edge.Mar.1 %>%
@@ -2096,7 +2101,7 @@ edge.Mar.1 <- edge.Mar.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Mar.1 <- graph.data.frame(edge.Mar.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Mar.1 <- as_adjacency_matrix(graph.Mar.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2112,7 +2117,7 @@ gorder(g.Mar.1)
 gsize(g.Mar.1)
 #179
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeMar <- degree(g.Mar.1)
 mean(degreeMar)
 #14.91667
@@ -2122,7 +2127,7 @@ mean(degreeMar)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Mar.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMar), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMar),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2142,7 +2147,7 @@ melt(strength.Mar)%>%
   arrange(desc(strength.Mar))
 #KO_NET215   113
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessMar <- closeness(g.Mar.1, vids = V(g.Mar.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2163,9 +2168,9 @@ g.Mar.ec <- eigen_centrality(g.Mar.1, directed = FALSE)
 mean(g.Mar.ec$vector)
 # 0.4224495
 
-which.max(g.Mar.ec$vector) 
-#KO_NET215 
-#15 
+which.max(g.Mar.ec$vector)
+#KO_NET215
+#15
 
 
 ##Network Diameter
@@ -2196,7 +2201,7 @@ mean_distance(g.Mar.1)
 #1.362319
 
 #APRIL METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Apr.1 <- edgeApr
 
 edge.Apr.1 <- edge.Apr.1 %>%
@@ -2205,7 +2210,7 @@ edge.Apr.1 <- edge.Apr.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Apr.1 <- graph.data.frame(edge.Apr.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Apr.1 <- as_adjacency_matrix(graph.Apr.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2221,7 +2226,7 @@ gorder(g.Apr.1)
 gsize(g.Apr.1)
 #81
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeApr <- degree(g.Apr.1)
 mean(degreeApr)
 # 8.1
@@ -2231,7 +2236,7 @@ mean(degreeApr)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Apr.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeApr), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeApr),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2251,7 +2256,7 @@ melt(strength.Apr)%>%
   arrange(desc(strength.Apr))
 #HN_NET115    45
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessApr <- closeness(g.Apr.1, vids = V(g.Apr.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2272,9 +2277,9 @@ g.Apr.ec <- eigen_centrality(g.Apr.1, directed = FALSE)
 mean(g.Apr.ec$vector)
 #0.3953475
 
-which.max(g.Apr.ec$vector) 
-#HN_NET115 
-#10 
+which.max(g.Apr.ec$vector)
+#HN_NET115
+#10
 
 
 ##Network Diameter
@@ -2306,7 +2311,7 @@ mean_distance(g.Apr.1)
 
 #MAY METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.May.1 <- edgeMay
 
 edge.May.1 <- edge.May.1 %>%
@@ -2315,7 +2320,7 @@ edge.May.1 <- edge.May.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.May.1 <- graph.data.frame(edge.May.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.May.1 <- as_adjacency_matrix(graph.May.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2331,7 +2336,7 @@ gorder(g.May.1)
 gsize(g.May.1)
 #47
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeMay <- degree(g.May.1)
 mean(degreeMay)
 #5.529412
@@ -2341,7 +2346,7 @@ mean(degreeMay)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.May.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMay), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMay),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2361,7 +2366,7 @@ melt(strength.May)%>%
   arrange(desc(strength.May))
 #GJ_NET116    24
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessMay <- closeness(g.May.1, vids = V(g.May.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2382,9 +2387,9 @@ g.May.ec <- eigen_centrality(g.May.1, directed = FALSE)
 mean(g.May.ec$vector)
 # 0.4148308
 
-which.max(g.May.ec$vector) 
-#GJ_NET116 
-#6 
+which.max(g.May.ec$vector)
+#GJ_NET116
+#6
 
 
 ##Network Diameter
@@ -2415,7 +2420,7 @@ mean_distance(g.May.1)
 #1.882353
 
 #JUNE METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Jun.1 <- edgeJun
 
 edge.Jun.1 <- edge.Jun.1 %>%
@@ -2424,7 +2429,7 @@ edge.Jun.1 <- edge.Jun.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Jun.1 <- graph.data.frame(edge.Jun.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Jun.1 <- as_adjacency_matrix(graph.Jun.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2440,7 +2445,7 @@ gorder(g.Jun.1)
 gsize(g.Jun.1)
 # 19
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeJun <- degree(g.Jun.1)
 mean(degreeJun)
 #3.8
@@ -2450,7 +2455,7 @@ mean(degreeJun)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Jun.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJun), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJun),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2470,7 +2475,7 @@ melt(strength.Jun)%>%
   arrange(desc(strength.Jun))
 #HN_NET115     9
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessJun <- closeness(g.Jun.1, vids = V(g.Jun.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2491,8 +2496,8 @@ g.Jun.ec <- eigen_centrality(g.Jun.1, directed = FALSE)
 mean(g.Jun.ec$vector)
 #0.5080717
 
-which.max(g.Jun.ec$vector) 
-#IH_NET116 
+which.max(g.Jun.ec$vector)
+#IH_NET116
 #6
 
 
@@ -2524,7 +2529,7 @@ mean_distance(g.Jun.1)
 #1.977778
 
 #JULY METRICS NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Jul.1 <- edgeJul
 
 edge.Jul.1 <- edge.Jul.1 %>%
@@ -2533,7 +2538,7 @@ edge.Jul.1 <- edge.Jul.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Jul.1 <- graph.data.frame(edge.Jul.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Jul.1 <- as_adjacency_matrix(graph.Jul.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2549,7 +2554,7 @@ gorder(g.Jul.1)
 gsize(g.Jul.1)
 #74
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeJul <- degree(g.Jul.1)
 mean(degreeJul)
 #7.047619
@@ -2559,7 +2564,7 @@ mean(degreeJul)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Jul.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJul), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJul),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2579,7 +2584,7 @@ melt(strength.Jul)%>%
   arrange(desc(strength.Jul))
 #II_NET214    26
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessJul <- closeness(g.Jul.1, vids = V(g.Jul.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2600,8 +2605,8 @@ g.Jul.ec <- eigen_centrality(g.Jul.1, directed = FALSE)
 mean(g.Jul.ec$vector)
 #0.3708662
 
-which.max(g.Jul.ec$vector) 
-#SY_NET217 
+which.max(g.Jul.ec$vector)
+#SY_NET217
 #13
 
 
@@ -2634,7 +2639,7 @@ mean_distance(g.Jul.1)
 
 #AUGUST METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Aug.1 <- edgeAug
 
 edge.Aug.1 <- edge.Aug.1 %>%
@@ -2643,7 +2648,7 @@ edge.Aug.1 <- edge.Aug.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Aug.1 <- graph.data.frame(edge.Aug.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Aug.1 <- as_adjacency_matrix(graph.Aug.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2659,7 +2664,7 @@ gorder(g.Aug.1)
 gsize(g.Aug.1)
 #202
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeAug <- degree(g.Aug.1)
 mean(degreeAug)
 #15.53846
@@ -2669,7 +2674,7 @@ mean(degreeAug)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Aug.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeAug), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeAug),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2689,7 +2694,7 @@ melt(strength.Aug)%>%
   arrange(desc(strength.Aug))
 #ZM_SAND17   159
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessAug <- closeness(g.Aug.1, vids = V(g.Aug.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2710,9 +2715,9 @@ g.Aug.ec <- eigen_centrality(g.Aug.1, directed = FALSE)
 mean(g.Aug.ec$vector)
 #0.4621206
 
-which.max(g.Aug.ec$vector) 
-#ZM_SAND17 
-#22 
+which.max(g.Aug.ec$vector)
+#ZM_SAND17
+#22
 
 
 ##Network Diameter
@@ -2744,7 +2749,7 @@ mean_distance(g.Aug.1)
 
 #SEPTEMBER METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Sep.1 <- edgeSep
 
 edge.Sep.1 <- edge.Sep.1 %>%
@@ -2753,7 +2758,7 @@ edge.Sep.1 <- edge.Sep.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Sep.1 <- graph.data.frame(edge.Sep.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Sep.1 <- as_adjacency_matrix(graph.Sep.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2769,7 +2774,7 @@ gorder(g.Sep.1)
 gsize(g.Sep.1)
 #192
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeSep <- degree(g.Sep.1)
 mean(degreeSep)
 #15.36
@@ -2779,7 +2784,7 @@ mean(degreeSep)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Sep.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeSep), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeSep),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2799,7 +2804,7 @@ melt(strength.Sep)%>%
   arrange(desc(strength.Sep))
 #ZM_SAND17   143
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessSep <- closeness(g.Sep.1, vids = V(g.Sep.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2820,9 +2825,9 @@ g.Sep.ec <- eigen_centrality(g.Sep.1, directed = FALSE)
 mean(g.Sep.ec$vector)
 #0.4650383
 
-which.max(g.Sep.ec$vector) 
-#ZM_SAND17 
-#21 
+which.max(g.Sep.ec$vector)
+#ZM_SAND17
+#21
 
 
 ##Network Diameter
@@ -2854,7 +2859,7 @@ mean_distance(g.Sep.1)
 
 #OCTOBER METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Oct.1 <- edgeOct
 
 edge.Oct.1 <- edge.Oct.1 %>%
@@ -2863,7 +2868,7 @@ edge.Oct.1 <- edge.Oct.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Oct.1 <- graph.data.frame(edge.Oct.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Oct.1 <- as_adjacency_matrix(graph.Oct.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2879,7 +2884,7 @@ gorder(g.Oct.1)
 gsize(g.Oct.1)
 #237
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeOct <- degree(g.Oct.1)
 mean(degreeOct)
 #18.23077
@@ -2889,7 +2894,7 @@ mean(degreeOct)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Oct.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeOct), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeOct),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -2909,7 +2914,7 @@ melt(strength.Oct)%>%
   arrange(desc(strength.Oct))
 #90_NET214   221
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessOct <- closeness(g.Oct.1, vids = V(g.Oct.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -2930,9 +2935,9 @@ g.Oct.ec <- eigen_centrality(g.Oct.1, directed = FALSE)
 mean(g.Oct.ec$vector)
 #0.5094624
 
-which.max(g.Oct.ec$vector) 
-#90_NET214 
-#4  
+which.max(g.Oct.ec$vector)
+#90_NET214
+#4
 
 
 ##Network Diameter
@@ -2964,7 +2969,7 @@ mean_distance(g.Oct.1)
 
 #NOVEMBER METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Nov.1 <- edgeNov
 
 edge.Nov.1 <- edge.Nov.1 %>%
@@ -2973,7 +2978,7 @@ edge.Nov.1 <- edge.Nov.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Nov.1 <- graph.data.frame(edge.Nov.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Nov.1 <- as_adjacency_matrix(graph.Nov.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -2989,7 +2994,7 @@ gorder(g.Nov.1)
 gsize(g.Nov.1)
 #233
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNov <- degree(g.Nov.1)
 mean(degreeNov)
 #16.64286
@@ -2999,7 +3004,7 @@ mean(degreeNov)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Nov.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNov), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNov),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3019,7 +3024,7 @@ melt(strength.Nov)%>%
   arrange(desc(strength.Nov))
 #HN_NET115   205
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNov <- closeness(g.Nov.1, vids = V(g.Nov.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3040,9 +3045,9 @@ g.Nov.ec <- eigen_centrality(g.Nov.1, directed = FALSE)
 mean(g.Nov.ec$vector)
 #0.4637583
 
-which.max(g.Nov.ec$vector) 
-#HN_NET115 
-#13 
+which.max(g.Nov.ec$vector)
+#HN_NET115
+#13
 
 
 ##Network Diameter
@@ -3074,7 +3079,7 @@ mean_distance(g.Nov.1)
 
 #DECEMBER METRICS NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Dec.1 <- edgeDec
 
 edge.Dec.1 <- edge.Dec.1 %>%
@@ -3083,7 +3088,7 @@ edge.Dec.1 <- edge.Dec.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Dec.1 <- graph.data.frame(edge.Dec.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Dec.1 <- as_adjacency_matrix(graph.Dec.1, type = "both", names = TRUE,
                                sparse = FALSE, attr = "weight")
 
@@ -3099,7 +3104,7 @@ gorder(g.Dec.1)
 gsize(g.Dec.1)
 #219
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeDec <- degree(g.Dec.1)
 mean(degreeDec)
 # 17.52
@@ -3109,7 +3114,7 @@ mean(degreeDec)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Dec.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeDec), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeDec),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3129,7 +3134,7 @@ melt(strength.Dec)%>%
   arrange(desc(strength.Dec))
 #90_NET214   141
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessDec <- closeness(g.Dec.1, vids = V(g.Dec.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3150,9 +3155,9 @@ g.Dec.ec <- eigen_centrality(g.Dec.1, directed = FALSE)
 mean(g.Dec.ec$vector)
 #0.5158233
 
-which.max(g.Dec.ec$vector) 
-#90_NET214 
-#4 
+which.max(g.Dec.ec$vector)
+#90_NET214
+#4
 
 
 ##Network Diameter
@@ -3186,7 +3191,7 @@ mean_distance(g.Dec.1)
 
 
 #BREEDING SEASON NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Breed.1 <- edgeBreeding
 
 edge.Breed.1 <- edge.Breed.1 %>%
@@ -3195,7 +3200,7 @@ edge.Breed.1 <- edge.Breed.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Breed.1 <- graph.data.frame(edge.Breed.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Breed.1 <- as_adjacency_matrix(graph.Breed.1, type = "both", names = TRUE,
                                  sparse = FALSE, attr = "weight")
 
@@ -3211,7 +3216,7 @@ gorder(g.Breed.1)
 gsize(g.Breed.1)
 #133
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeBreed <- degree(g.Breed.1)
 mean(degreeBreed)
 #10.64
@@ -3221,7 +3226,7 @@ mean(degreeBreed)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Breed.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3241,7 +3246,7 @@ melt(strength.Breed)%>%
   arrange(desc(strength.Breed))
 #HN_NET115    89
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessBreed <- closeness(g.Breed.1, vids = V(g.Breed.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3262,9 +3267,9 @@ g.Breed.ec <- eigen_centrality(g.Breed.1, directed = FALSE)
 mean(g.Breed.ec$vector)
 #0.3764487
 
-which.max(g.Breed.ec$vector) 
-#HN_NET115 
-#10 
+which.max(g.Breed.ec$vector)
+#HN_NET115
+#10
 
 
 ##Network Diameter
@@ -3296,7 +3301,7 @@ mean_distance(g.Breed.1)
 
 #NON-BREEDING SEASON NO ISOLATES####
 
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Nonbreed.1 <- edgeNonbreeding
 
 edge.Nonbreed.1 <- edge.Nonbreed.1 %>%
@@ -3305,7 +3310,7 @@ edge.Nonbreed.1 <- edge.Nonbreed.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Nonbreed.1 <- graph.data.frame(edge.Nonbreed.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Nonbreed.1 <- as_adjacency_matrix(graph.Nonbreed.1, type = "both", names = TRUE,
                                     sparse = FALSE, attr = "weight")
 
@@ -3321,7 +3326,7 @@ gorder(g.Nonbreed.1)
 gsize(g.Nonbreed.1)
 #276
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonbreed <- degree(g.Nonbreed.1)
 mean(degreeNonbreed)
 # 19.03448
@@ -3331,7 +3336,7 @@ mean(degreeNonbreed)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Nonbreed.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonbreed), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonbreed),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3351,7 +3356,7 @@ melt(strength.Nonbreed)%>%
   arrange(desc(strength.Nonbreed))
 #90_NET214   683
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonbreed <- closeness(g.Nonbreed.1, vids = V(g.Nonbreed.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3372,9 +3377,9 @@ g.Nonbreed.ec <- eigen_centrality(g.Nonbreed.1, directed = FALSE)
 mean(g.Nonbreed.ec$vector)
 #0.4827627
 
-which.max(g.Nonbreed.ec$vector) 
-#90_NET214 
-#4 
+which.max(g.Nonbreed.ec$vector)
+#90_NET214
+#4
 
 
 ##Network Diameter
@@ -3405,7 +3410,7 @@ mean_distance(g.Nonbreed.1)
 #1.320197
 
 #WINTER NO ISOLATES####
-#Select only values with "weights" 1 or larger 
+#Select only values with "weights" 1 or larger
 edge.Winter.1 <- edgeWinter
 
 edge.Winter.1 <- edge.Winter.1 %>%
@@ -3414,7 +3419,7 @@ edge.Winter.1 <- edge.Winter.1 %>%
 #same for adjusted 3 up-make it a data frame
 graph.Winter.1 <- graph.data.frame(edge.Winter.1, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 g.Winter.1 <- as_adjacency_matrix(graph.Winter.1, type = "both", names = TRUE,
                                   sparse = FALSE, attr = "weight")
 
@@ -3430,7 +3435,7 @@ gorder(g.Winter.1)
 gsize(g.Winter.1)
 #243
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter <- degree(g.Winter.1)
 mean(degreeWinter)
 #18.69231
@@ -3440,7 +3445,7 @@ mean(degreeWinter)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(g.Winter.1, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3460,7 +3465,7 @@ melt(strength.Winter)%>%
   arrange(desc(strength.Winter))
 #KO_NET215   320
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter <- closeness(g.Winter.1, vids = V(g.Winter.1), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3481,9 +3486,9 @@ g.Winter.ec <- eigen_centrality(g.Winter.1, directed = FALSE)
 mean(g.Winter.ec$vector)
 #0.4727996
 
-which.max(g.Winter.ec$vector) 
-#KO_NET215 
-#17 
+which.max(g.Winter.ec$vector)
+#KO_NET215
+#17
 
 
 ##Network Diameter
@@ -3525,7 +3530,7 @@ Global.adj3 <- Global.adj3 %>%
 #same for adjusted 3 up-make it a data frame
 Globgraph.adj3 <- graph.data.frame(Global.adj3, directed = FALSE)
 
-#Same for adjusted 3 up-make it a matrix 
+#Same for adjusted 3 up-make it a matrix
 Glob.Matrix.adj3 <- as_adjacency_matrix(Globgraph.adj3, type = "both", names = TRUE,
                                         sparse = FALSE, attr = "weight")
 
@@ -3549,7 +3554,7 @@ gorder(Glob.Matrix.adj3)
 gsize(Glob.Matrix.adj3)
 #254
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeGlobal.adj <- degree(Glob.Matrix.adj3)
 mean(degreeGlobal.adj)
 #18.81481
@@ -3559,7 +3564,7 @@ mean(degreeGlobal.adj)
 #https://mr.schochastics.net/material/netVizR/
 set.seed(666)
 ggraph(Glob.Matrix.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeGlobal.adj, 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeGlobal.adj,
                                                                                color = factor(Sex))) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
   theme_void() + ggtitle("Glob.Matrix.adj3") +
@@ -3578,7 +3583,7 @@ melt(strength.Globaladj)%>%
   arrange(desc(strength.Globaladj))
 #HN_NET115  1026
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessGlobal.adj <- closeness(Glob.Matrix.adj3, vids = V(Glob.Matrix.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3599,8 +3604,8 @@ gGlobaladj.ec <- eigen_centrality(Glob.Matrix.adj3, directed = FALSE)
 mean(gGlobaladj.ec$vector)
 #0.5025833
 
-which.max(gGlobaladj.ec$vector) 
-#HN_NET115 
+which.max(gGlobaladj.ec$vector)
+#HN_NET115
 #13
 
 
@@ -3661,7 +3666,7 @@ matrix2015.adj3 <- as_adjacency_matrix(graph2015.adj3, type = "both", names = TR
 #convert
 gmatrix2015.adj3 <- graph.adjacency(matrix2015.adj3, mode = "undirected", weighted=TRUE, diag = FALSE)
 
-#number of nodes 
+#number of nodes
 gorder(gmatrix2015.adj3)
 #13
 
@@ -3675,7 +3680,7 @@ degree15
 melt(degree15) %>%
   arrange(desc(degree15))
 hist(degree15, breaks= 30)
-which.max(degree15)  
+which.max(degree15)
 
 degree15.adj <- degree(gmatrix2015.adj3)
 mean(degree15.adj)
@@ -3684,7 +3689,7 @@ mean(degree15.adj)
 #Plot
 set.seed(32)
 ggraph(gmatrix2015.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree15.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree15.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3712,12 +3717,12 @@ melt(strength.2015adj)%>%
 #mean of strength
 mean(strength.2015adj)
 #44.15385
- 
+
 #Sum of strengths
 sum(strength.2015adj)
 #574
 
-#closeness: how many steps are required to access every other node from a given node 
+#closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 ?closeness
 closeness15 <- closeness(gmatrix2015.adj3, vids = V(gmatrix2015.adj3), weights = NULL, normalized = FALSE)
@@ -3730,14 +3735,14 @@ betweenness(gmatrix2015.adj3)
 mean(betweenness(gmatrix2015.adj3))
 #2.307692
 
-# Identify key nodes in the FICR network with Eigenvector centrality: 
+# Identify key nodes in the FICR network with Eigenvector centrality:
 #EC a measure of the influence of a node, connections to high-scoring nodes contribute more to
 #the score of the node in question
-#A high EV centrality score means that the node is connected to many nodes who themselves 
+#A high EV centrality score means that the node is connected to many nodes who themselves
 #have high scores
 g2015.ec <- eigen_centrality(gmatrix2015.adj3, directed = FALSE)
 g2015.ec
-which.max(g2015.ec$vector) 
+which.max(g2015.ec$vector)
 #78_NET214 = 2
 mean(g2015.ec$vector)
 #0.588774
@@ -3789,11 +3794,11 @@ tmatrix2015 <- as.tnet(matrix2015.adj3, type= "weighted one-mode tnet")
 
 #Global clustering coefficient is assumed to be DIRECTED but it is symmatrized so we should be good
 clustering_w(tmatrix2015, measure= c("bi", "am", "gm", "ma", "mi"))
-#bi        am        gm        ma        mi 
-#0.8739669 0.8907168 0.8939508 0.8813953 0.9041031 
+#bi        am        gm        ma        mi
+#0.8739669 0.8907168 0.8939508 0.8813953 0.9041031
 #bi= binary, am= arithmetic mean, gm=geometric mean, mi-minimum measure, ma=maximum
 #sosa 2019: "minumum variant should be preferred when trying to understand the mechanisms
-#that shape link creation in animal societies as it helps determine the minimum threshold needed for 
+#that shape link creation in animal societies as it helps determine the minimum threshold needed for
 #closed triplets to occur
 
 #Opsahls Local Clustering Coefficient
@@ -3834,14 +3839,14 @@ gorder(gmatrix2016.adj3)
 gsize(gmatrix2016.adj3)
 #105
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree16.adj <- degree(gmatrix2016.adj3)
 mean(degree16.adj)
 #12.35294
 
 set.seed(32)
 ggraph(gmatrix2016.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree16.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree16.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3861,7 +3866,7 @@ melt(strength.2016adj)%>%
   arrange(desc(strength.2016adj))
 #AU_NET115   161
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness16 <- closeness(gmatrix2016.adj3, vids = V(gmatrix2016.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3882,8 +3887,8 @@ g2016.ec <- eigen_centrality(gmatrix2016.adj3, directed = FALSE)
 mean(g2016.ec$vector)
 #0.5208766
 
-which.max(g2016.ec$vector) 
-#AU_NET115 
+which.max(g2016.ec$vector)
+#AU_NET115
 #4
 
 ##Network Diameter
@@ -3942,14 +3947,14 @@ gorder(gmatrix2017.adj3)
 gsize(gmatrix2017.adj3)
 #199
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree17.adj <- degree(gmatrix2017.adj3)
 mean(degree17.adj)
 #18.95238
 
 set.seed(32)
 ggraph(gmatrix2017.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree17.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree17.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -3969,7 +3974,7 @@ melt(strength.2017adj)%>%
   arrange(desc(strength.2017adj))
 #IH_NET116   537
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness17 <- closeness(gmatrix2017.adj3, vids = V(gmatrix2017.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -3990,9 +3995,9 @@ g2017.ec <- eigen_centrality(gmatrix2017.adj3, directed = FALSE)
 mean(g2017.ec$vector)
 #0.6942925
 
-which.max(g2017.ec$vector) 
-#IH_NET116 
-#11 
+which.max(g2017.ec$vector)
+#IH_NET116
+#11
 
 
 ##Network Diameter
@@ -4023,7 +4028,7 @@ mean_distance(gmatrix2017.adj3)
 #1.052381
 
 #2018 METRICS####
- 
+
 matrix2018 <- graph.adjacency(matrix2018, mode= "undirected", weighted=TRUE, diag = FALSE)
 
 #Select only values with "weights" 3 or larger (i.e. only individuals seen together 3 or more times)
@@ -4051,14 +4056,14 @@ gorder(gmatrix2018.adj3)
 gsize(gmatrix2018.adj3)
 #94
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree18.adj <- degree(gmatrix2018.adj3)
 mean(degree18.adj)
 #11.75
 
 set.seed(32)
 ggraph(gmatrix2018.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree18.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree18.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4078,7 +4083,7 @@ melt(strength.2018adj)%>%
   arrange(desc(strength.2018adj))
 #ZM_SAND17   319
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness18 <- closeness(gmatrix2018.adj3, vids = V(gmatrix2018.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4099,9 +4104,9 @@ g2018.ec <- eigen_centrality(gmatrix2018.adj3, directed = FALSE)
 mean(g2018.ec$vector)
 #0.5765702
 
-which.max(g2018.ec$vector) 
-#ZM_SAND17 
-#16 
+which.max(g2018.ec$vector)
+#ZM_SAND17
+#16
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -4158,14 +4163,14 @@ gorder(gmatrix2019.adj3)
 gsize(gmatrix2019.adj3)
 #48
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree19.adj <- degree(gmatrix2019.adj3)
 mean(degree19.adj)
 #8
 
 set.seed(32)
 ggraph(gmatrix2019.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree19.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree19.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4185,7 +4190,7 @@ melt(strength.2019adj)%>%
   arrange(desc(strength.2019adj))
 #ZM_SAND17   159
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness19 <- closeness(gmatrix2019.adj3, vids = V(gmatrix2019.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4206,9 +4211,9 @@ g2019.ec <- eigen_centrality(gmatrix2019.adj3, directed = FALSE)
 mean(g2019.ec$vector)
 #0.5948407
 
-which.max(g2019.ec$vector) 
-#ZM_SAND17 
-#10 
+which.max(g2019.ec$vector)
+#ZM_SAND17
+#10
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -4266,14 +4271,14 @@ gorder(gmatrix2020.adj3)
 gsize(gmatrix2020.adj3)
 #18
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degree20.adj <- degree(gmatrix2020.adj3)
 mean(degree20.adj)
 #5.142857
 
 set.seed(32)
 ggraph(gmatrix2020.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree20.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degree20.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4293,7 +4298,7 @@ melt(strength.2020adj)%>%
   arrange(desc(strength.2020adj))
 #SY_NET217    47
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closeness20 <- closeness(gmatrix2020.adj3, vids = V(gmatrix2020.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4314,9 +4319,9 @@ g2020.ec <- eigen_centrality(gmatrix2020.adj3, directed = FALSE)
 mean(g2020.ec$vector)
 #0.7880182
 
-which.max(g2020.ec$vector) 
-#SY_NET217 
-#5 
+which.max(g2020.ec$vector)
+#SY_NET217
+#5
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -4377,14 +4382,14 @@ gorder(g.Jan.matrix.adj3)
 gsize(g.Jan.matrix.adj3)
 #22
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeJan.adj <- degree(g.Jan.matrix.adj3)
 mean(degreeJan.adj)
 #3.666667
 
 set.seed(32)
 ggraph(g.Jan.matrix.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJan.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJan.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4404,7 +4409,7 @@ melt(strength.Janadj)%>%
   arrange(desc(strength.Janadj))
 #KO_NET215    21
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessJan <- closeness(g.Jan.matrix.adj3, vids = V(g.Jan.matrix.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4425,7 +4430,7 @@ gJan.ec <- eigen_centrality(g.Jan.matrix.adj3, directed = FALSE)
 mean(gJan.ec$vector)
 #0.4525612
 
-which.max(g.Jan.matrix.adj3$vector) 
+which.max(g.Jan.matrix.adj3$vector)
 #integrer(0) --KO=1
 
 ##Network Diameter
@@ -4480,14 +4485,14 @@ gorder(g.Feb.matrix.adj3)
 gsize(g.Feb.matrix.adj3)
 #68
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeFeb.adj <- degree(g.Feb.matrix.adj3)
 mean(degreeFeb.adj)
 #9.066667
 
 set.seed(32)
 ggraph(g.Feb.matrix.adj3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeFeb.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeFeb.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4507,7 +4512,7 @@ melt(strength.Febadj)%>%
   arrange(desc(strength.Febadj))
 #HN_NET115    63
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessFeb <- closeness(g.Feb.matrix.adj3, vids = V(g.Feb.matrix.adj3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4528,7 +4533,7 @@ gFeb.ec <- eigen_centrality(g.Feb.matrix.adj3, directed = FALSE)
 mean(gFeb.ec$vector)
 #0.6329929
 
-which.max(g.Feb.matrix.adj3$vector) 
+which.max(g.Feb.matrix.adj3$vector)
 #integrer(0) --KO=1
 
 ##Network Diameter
@@ -4584,14 +4589,14 @@ gorder(g.Mar.matrix3)
 gsize(g.Mar.matrix3)
 #84
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeMar.adj <- degree(g.Mar.matrix3)
 mean(degreeMar.adj)
 #8
 
 set.seed(32)
 ggraph(g.Mar.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMar.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMar.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4611,7 +4616,7 @@ melt(strength.Maradj3)%>%
   arrange(desc(strength.Maradj3))
 #KO_NET215   109
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessMar <- closeness(g.Mar.matrix3, vids = V(g.Mar.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4632,7 +4637,7 @@ gMar.ec <- eigen_centrality(g.Mar.matrix3, directed = FALSE)
 mean(gMar.ec$vector)
 #0.4043085
 
-which.max(g.Mar.matrix3$vector) 
+which.max(g.Mar.matrix3$vector)
 #integrer(0) --KO=1
 
 ##Network Diameter
@@ -4689,14 +4694,14 @@ gorder(g.Apr.matrix3)
 gsize(g.Apr.matrix3)
 #23
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeApr.adj <- degree(g.Apr.matrix3)
 mean(degreeApr.adj)
 #3.538462
 
 set.seed(32)
 ggraph(g.Apr.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeApr.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeApr.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4716,7 +4721,7 @@ melt(strength.Apradj3)%>%
   arrange(desc(strength.Apradj3))
 #HN_NET115    34
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessApr <- closeness(g.Apr.matrix3, vids = V(g.Apr.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4737,7 +4742,7 @@ gApr.ec <- eigen_centrality(g.Apr.matrix3, directed = FALSE)
 mean(gApr.ec$vector)
 #0.4234371
 
-which.max(g.Apr.matrix3$vector) 
+which.max(g.Apr.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -4793,14 +4798,14 @@ gorder(g.May.matrix3)
 gsize(g.May.matrix3)
 #12
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeMay.adj <- degree(g.May.matrix3)
 mean(degreeMay.adj)
 #2.666667
 
 set.seed(32)
 ggraph(g.May.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMay.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeMay.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4820,7 +4825,7 @@ melt(strength.Mayadj3)%>%
   arrange(desc(strength.Mayadj3))
 #ZM_SAND17    17
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessMay <- closeness(g.May.matrix3, vids = V(g.May.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4841,7 +4846,7 @@ gMay.ec <- eigen_centrality(g.May.matrix3, directed = FALSE)
 mean(gMay.ec$vector)
 #0.4741028
 
-which.max(g.May.matrix3$vector) 
+which.max(g.May.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -4898,13 +4903,13 @@ gorder(g.Jun.matrix3)
 gsize(g.Jun.matrix3)
 #1
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeJun.adj <- degree(g.Jun.matrix3)
 mean(degreeJun.adj)
 
 set.seed(32)
 ggraph(g.Jun.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJun.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJun.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -4924,7 +4929,7 @@ melt(strength.Junadj3)%>%
   arrange(desc(strength.Junadj3))
 
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessJun <- closeness(g.Jun.matrix3, vids = V(g.Jun.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -4945,7 +4950,7 @@ gJun.ec <- eigen_centrality(g.Jun.matrix3, directed = FALSE)
 mean(gJun.ec$vector)
 
 
-which.max(g.Jun.matrix3$vector) 
+which.max(g.Jun.matrix3$vector)
 
 
 ##Network Diameter
@@ -5002,14 +5007,14 @@ gorder(g.Jul.matrix3)
 gsize(g.Jul.matrix3)
 #10
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeJul.adj <- degree(g.Jul.matrix3)
 mean(degreeJul.adj)
 #2
 
 set.seed(32)
 ggraph(g.Jul.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJul.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeJul.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5029,7 +5034,7 @@ melt(strength.Jul)%>%
   arrange(desc(strength.Jul))
 #SY_NET217    19
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessJul <- closeness(g.Jul.matrix3, vids = V(g.Jul.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5050,7 +5055,7 @@ gJul.ec <- eigen_centrality(g.Jul.matrix3, directed = FALSE)
 mean(gJul.ec$vector)
 #0.3505717
 
-which.max(g.Jul.matrix3$vector) 
+which.max(g.Jul.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5107,14 +5112,14 @@ gorder(g.Aug.matrix3)
 gsize(g.Aug.matrix3)
 #113
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeAug.adj <- degree(g.Aug.matrix3)
 mean(degreeAug.adj)
 #10.27273
 
 set.seed(32)
 ggraph(g.Aug.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeAug.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeAug.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5134,7 +5139,7 @@ melt(strength.Aug)%>%
   arrange(desc(strength.Aug))
 #ZM_SAND17   155
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessAug <- closeness(g.Aug.matrix3, vids = V(g.Aug.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5155,7 +5160,7 @@ gAug.ec <- eigen_centrality(g.Aug.matrix3, directed = FALSE)
 mean(gAug.ec$vector)
 #0.5124347
 
-which.max(g.Aug.matrix3$vector) 
+which.max(g.Aug.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5211,14 +5216,14 @@ gorder(g.Sep.matrix3)
 gsize(g.Sep.matrix3)
 #123
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeSep.adj <- degree(g.Sep.matrix3)
 mean(degreeSep.adj)
 #11.71429
 
 set.seed(32)
 ggraph(g.Sep.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeSep.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeSep.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5238,7 +5243,7 @@ melt(strength.Sepadj)%>%
   arrange(desc(strength.Sepadj))
 #ZM_SAND17   138
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessSep <- closeness(g.Sep.matrix3, vids = V(g.Sep.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5259,7 +5264,7 @@ gSep.ec <- eigen_centrality(g.Sep.matrix3, directed = FALSE)
 mean(gSep.ec$vector)
 #0.5211402
 
-which.max(g.Sep.matrix3$vector) 
+which.max(g.Sep.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5315,14 +5320,14 @@ gorder(g.Oct.matrix3)
 gsize(g.Oct.matrix3)
 #192
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeOct.adj <- degree(g.Oct.matrix3)
 mean(degreeOct.adj)
 #15.36
 
 set.seed(32)
 ggraph(g.Oct.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeOct.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeOct.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5342,7 +5347,7 @@ melt(strength.Octadj)%>%
   arrange(desc(strength.Octadj))
 #90_NET214   217
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessOct <- closeness(g.Oct.matrix3, vids = V(g.Oct.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5363,8 +5368,8 @@ gOct.ec <- eigen_centrality(g.Oct.matrix3, directed = FALSE)
 mean(gOct.ec$vector)
 #0.5179746
 
-which.max(g.Oct.matrix3$vector) 
-#integrer(0) 
+which.max(g.Oct.matrix3$vector)
+#integrer(0)
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -5419,14 +5424,14 @@ gorder(g.Nov.matrix3)
 gsize(g.Nov.matrix3)
 #166
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNov.adj <- degree(g.Nov.matrix3)
 mean(degreeNov.adj)
 # 16.6
 
 set.seed(32)
 ggraph(g.Nov.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNov.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNov.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5446,7 +5451,7 @@ melt(strength.Novadj)%>%
   arrange(desc(strength.Novadj))
 #HN_NET115   202
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNov <- closeness(g.Nov.matrix3, vids = V(g.Nov.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5467,7 +5472,7 @@ gNov.ec <- eigen_centrality(g.Nov.matrix3, directed = FALSE)
 mean(gNov.ec$vector)
 #0.6289982
 
-which.max(g.Nov.matrix3$vector) 
+which.max(g.Nov.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5524,14 +5529,14 @@ gorder(g.Dec.matrix3)
 gsize(g.Dec.matrix3)
 #153
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeDec.adj <- degree(g.Dec.matrix3)
 mean(degreeDec.adj)
 #13.30435
 
 set.seed(32)
 ggraph(g.Dec.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeDec.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeDec.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5551,7 +5556,7 @@ melt(strength.Decadj)%>%
   arrange(desc(strength.Decadj))
 #90_NET214   138
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessDec <- closeness(g.Dec.matrix3, vids = V(g.Dec.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5572,7 +5577,7 @@ gDec.ec <- eigen_centrality(g.Dec.matrix3, directed = FALSE)
 mean(gDec.ec$vector)
 #0.5292601
 
-which.max(g.Dec.matrix3$vector) 
+which.max(g.Dec.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5633,14 +5638,14 @@ gorder(g.Breeding.matrix3)
 gsize(g.Breeding.matrix3)
 #64
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeBreeding.adj <- degree(g.Breeding.matrix3)
 mean(degreeBreeding.adj)
 #5.565217
 
 set.seed(32)
 ggraph(g.Breeding.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreeding.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreeding.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5660,7 +5665,7 @@ melt(strength.Breedingadj)%>%
   arrange(desc(strength.Breedingadj))
 #HN_NET115    80
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessBreeding <- closeness(g.Breeding.matrix3, vids = V(g.Breeding.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5681,7 +5686,7 @@ gBreeding.ec <- eigen_centrality(g.Breeding.matrix3, directed = FALSE)
 mean(gBreeding.ec$vector)
 #0.3571944
 
-which.max(g.Breeding.matrix3$vector) 
+which.max(g.Breeding.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5737,14 +5742,14 @@ gorder(g.NonBreed.matrix3)
 gsize(g.NonBreed.matrix3)
 #248
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonBreed.adj <- degree(g.NonBreed.matrix3)
 mean(degreeNonBreed.adj)
 #18.37037
 
 set.seed(32)
 ggraph(g.NonBreed.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5764,7 +5769,7 @@ melt(strength.NonBreedadj)%>%
   arrange(desc(strength.NonBreedadj))
 #90_NET214   679
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonBreed <- closeness(g.NonBreed.matrix3, vids = V(g.NonBreed.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5785,7 +5790,7 @@ gNonBreed.ec <- eigen_centrality(g.NonBreed.matrix3, directed = FALSE)
 mean(gNonBreed.ec$vector)
 #0.5166932
 
-which.max(g.NonBreed.matrix3$vector) 
+which.max(g.NonBreed.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5842,14 +5847,14 @@ gorder(g.Winter.matrix3)
 gsize(g.Winter.matrix3)
 #210
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter.adj <- degree(g.Winter.matrix3)
 mean(degreeWinter.adj)
 #17.5
 
 set.seed(32)
 ggraph(g.Winter.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5869,7 +5874,7 @@ melt(strength.Winteradj)%>%
   arrange(desc(strength.Winteradj))
 #KO_NET215   318
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter.adj <- closeness(g.Winter.matrix3, vids = V(g.Winter.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -5890,7 +5895,7 @@ gWinter.ec <- eigen_centrality(g.Winter.matrix3, directed = FALSE)
 mean(gWinter.ec$vector)
 #0.5065298
 
-which.max(g.Winter.matrix3$vector) 
+which.max(g.Winter.matrix3$vector)
 #integrer(0)
 
 ##Network Diameter
@@ -5959,14 +5964,14 @@ gorder(g.Breed2016.matrix3)
 gsize(g.Breed2016.matrix3)
 #5
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeBreed2016.adj <- degree(g.Breed2016.matrix3)
 mean(degreeBreed2016.adj)
 #2
 
 set.seed(32)
 ggraph(g.Breed2016.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2016.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2016.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -5986,7 +5991,7 @@ melt(strength.Breed2016adj)%>%
   arrange(desc(strength.Breed2016adj))
 #AU_NET115    16
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessBreed2016 <- closeness(g.Breed2016.matrix3, vids = V(g.Breed2016.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6007,9 +6012,9 @@ gBreed2016.ec <- eigen_centrality(g.Breed2016.matrix3, directed = FALSE)
 mean(gBreed2016.ec$vector)
 # 0.627793
 
-which.max(gBreed2016.ec$vector) 
-#AU_NET115 
-#1 
+which.max(gBreed2016.ec$vector)
+#AU_NET115
+#1
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6064,14 +6069,14 @@ gorder(g.Breed2017.matrix3)
 gsize(g.Breed2017.matrix3)
 #25
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeBreed2017.adj <- degree(g.Breed2017.matrix3)
 mean(degreeBreed2017.adj)
 #3.333333
 
 set.seed(32)
 ggraph(g.Breed2017.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2017.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2017.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6091,7 +6096,7 @@ melt(strength.Breed2017adj)%>%
   arrange(desc(strength.Breed2017adj))
 #HN_NET115    35
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessBreed2017 <- closeness(g.Breed2017.matrix3, vids = V(g.Breed2017.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6112,9 +6117,9 @@ gBreed2017.ec <- eigen_centrality(g.Breed2017.matrix3, directed = FALSE)
 mean(gBreed2017.ec$vector)
 #0.3763815
 
-which.max(gBreed2017.ec$vector) 
-#HN_NET115 
-#8 
+which.max(gBreed2017.ec$vector)
+#HN_NET115
+#8
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6169,14 +6174,14 @@ gorder(g.Breed2018.matrix3)
 gsize(g.Breed2018.matrix3)
 #34
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeBreed2018.adj <- degree(g.Breed2018.matrix3)
 mean(degreeBreed2018.adj)
 #6.8
 
 set.seed(32)
 ggraph(g.Breed2018.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2018.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2018.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6196,7 +6201,7 @@ melt(strength.Breed2018adj)%>%
   arrange(desc(strength.Breed2018adj))
 #WP_SAND17    52
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessBreed2018 <- closeness(g.Breed2018.matrix3, vids = V(g.Breed2018.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6217,8 +6222,8 @@ gBreed2018.ec <- eigen_centrality(g.Breed2018.matrix3, directed = FALSE)
 mean(gBreed2018.ec$vector)
 #0.6595429
 
-which.max(gBreed2018.ec$vector) 
-#WP_SAND17 
+which.max(gBreed2018.ec$vector)
+#WP_SAND17
 # 9
 
 ##Network Diameter
@@ -6274,14 +6279,14 @@ gorder(g.Breed2019.matrix3)
 gsize(g.Breed2019.matrix3)
 #3
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeBreed2019.adj <- degree(g.Breed2019.matrix3)
 mean(degreeBreed2019.adj)
 #2
 
 set.seed(32)
 ggraph(g.Breed2019.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2019.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeBreed2019.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6301,7 +6306,7 @@ melt(strength.Breed2019adj)%>%
   arrange(desc(strength.Breed2019adj))
 #VZ_NET119     9
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessBreed2019 <- closeness(g.Breed2019.matrix3, vids = V(g.Breed2019.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6322,9 +6327,9 @@ gBreed2019.ec <- eigen_centrality(g.Breed2019.matrix3, directed = FALSE)
 mean(gBreed2019.ec$vector)
 #0.92671
 
-which.max(gBreed2019.ec$vector) 
-#VZ_NET119 
-#3 
+which.max(gBreed2019.ec$vector)
+#VZ_NET119
+#3
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6392,14 +6397,14 @@ gorder(g.NonBreed2015.matrix3)
 gsize(g.NonBreed2015.matrix3)
 #48
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonBreed2015.adj <- degree(g.NonBreed2015.matrix3)
 mean(degreeNonBreed2015.adj)
 #8.727273
 
 set.seed(32)
 ggraph(g.NonBreed2015.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2015.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2015.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6419,7 +6424,7 @@ melt(strength.NonBreed2015adj)%>%
   arrange(desc(strength.NonBreed2015adj))
 #78_NET214    60
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonBreed2015 <- closeness(g.NonBreed2015.matrix3, vids = V(g.NonBreed2015.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6440,9 +6445,9 @@ gNonBreed2015.ec <- eigen_centrality(g.NonBreed2015.matrix3, directed = FALSE)
 mean(gNonBreed2015.ec$vector)
 #0.7049256
 
-which.max(gNonBreed2015.ec$vector) 
-#78_NET214 
-#2 
+which.max(gNonBreed2015.ec$vector)
+#78_NET214
+#2
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6498,14 +6503,14 @@ gorder(g.Winter2015.matrix3)
 gsize(g.Winter2015.matrix3)
 #4
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter2015.adj <- degree(g.Winter2015.matrix3)
 mean(degreeWinter2015.adj)
 #2
 
 set.seed(32)
 ggraph(g.Winter2015.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2015.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2015.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6525,7 +6530,7 @@ melt(strength.Winter2015adj)%>%
   arrange(desc(strength.Winter2015adj))
 #78_NET214     9
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter2015.adj <- closeness(g.Winter2015.matrix3, vids = V(g.Winter2015.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6546,9 +6551,9 @@ gWinter2015.ec <- eigen_centrality(g.Winter2015.matrix3, directed = FALSE)
 mean(gWinter2015.ec$vector)
 #0.7925216
 
-which.max(gWinter2015.ec$vector) 
-#78_NET214 
-#2 
+which.max(gWinter2015.ec$vector)
+#78_NET214
+#2
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6604,14 +6609,14 @@ gorder(g.NonBreed2016.matrix3)
 gsize(g.NonBreed2016.matrix3)
 #89
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonBreed2016.adj <- degree(g.NonBreed2016.matrix3)
 mean(degreeNonBreed2016.adj)
 #11.125
 
 set.seed(32)
 ggraph(g.NonBreed2016.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2016.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2016.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6631,7 +6636,7 @@ melt(strength.NonBreed2016adj)%>%
   arrange(desc(strength.NonBreed2016adj))
 #AU_NET115    95
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonBreed2016 <- closeness(g.NonBreed2016.matrix3, vids = V(g.NonBreed2016.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6652,8 +6657,8 @@ gNonBreed2016.ec <- eigen_centrality(g.NonBreed2016.matrix3, directed = FALSE)
 mean(gNonBreed2016.ec$vector)
 #0.5940128
 
-which.max(gNonBreed2016.ec$vector) 
-#AU_NET115 
+which.max(gNonBreed2016.ec$vector)
+#AU_NET115
 #4
 
 ##Network Diameter
@@ -6710,14 +6715,14 @@ gorder(g.Winter2016.matrix3)
 gsize(g.Winter2016.matrix3)
 #41
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter2016.adj <- degree(g.Winter2016.matrix3)
 mean(degreeWinter2016.adj)
 #7.454545
 
 set.seed(32)
 ggraph(g.Winter2016.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2016.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2016.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6737,7 +6742,7 @@ melt(strength.Winter2016adj)%>%
   arrange(desc(strength.Winter2016adj))
 #AU_NET115    45
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter2016.adj <- closeness(g.Winter2016.matrix3, vids = V(g.Winter2016.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6758,9 +6763,9 @@ gWinter2016.ec <- eigen_centrality(g.Winter2016.matrix3, directed = FALSE)
 mean(gWinter2016.ec$vector)
 # 0.6765314
 
-which.max(gWinter2016.ec$vector) 
-#AU_NET115 
-#3 
+which.max(gWinter2016.ec$vector)
+#AU_NET115
+#3
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6817,14 +6822,14 @@ gorder(g.NonBreed2017.matrix3)
 gsize(g.NonBreed2017.matrix3)
 #183
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonBreed2017.adj <- degree(g.NonBreed2017.matrix3)
 mean(degreeNonBreed2017.adj)
 #18.3
 
 set.seed(32)
 ggraph(g.NonBreed2017.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2017.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2017.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6844,7 +6849,7 @@ melt(strength.NonBreed2017adj)%>%
   arrange(desc(strength.NonBreed2017adj))
 #IH_NET116   369
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonBreed2017 <- closeness(g.NonBreed2017.matrix3, vids = V(g.NonBreed2017.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6865,9 +6870,9 @@ gNonBreed2017.ec <- eigen_centrality(g.NonBreed2017.matrix3, directed = FALSE)
 mean(gNonBreed2017.ec$vector)
 #0.7162622
 
-which.max(gNonBreed2017.ec$vector) 
-#IH_NET116 
-#10 
+which.max(gNonBreed2017.ec$vector)
+#IH_NET116
+#10
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -6923,14 +6928,14 @@ gorder(g.Winter2017.matrix3)
 gsize(g.Winter2017.matrix3)
 #178
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter2017.adj <- degree(g.Winter2017.matrix3)
 mean(degreeWinter2017.adj)
 #16.95238
 
 set.seed(32)
 ggraph(g.Winter2017.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2017.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2017.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -6950,7 +6955,7 @@ melt(strength.Winter2017adj)%>%
   arrange(desc(strength.Winter2017adj))
 #KO_NET215   144
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter2017.adj <- closeness(g.Winter2017.matrix3, vids = V(g.Winter2017.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -6971,9 +6976,9 @@ gWinter2017.ec <- eigen_centrality(g.Winter2017.matrix3, directed = FALSE)
 mean(gWinter2017.ec$vector)
 #0.6871366
 
-which.max(gWinter2017.ec$vector) 
-#KO_NET215 
-#14 
+which.max(gWinter2017.ec$vector)
+#KO_NET215
+#14
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -7029,14 +7034,14 @@ gorder(g.NonBreed2018.matrix3)
 gsize(g.NonBreed2018.matrix3)
 #66
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonBreed2018.adj <- degree(g.NonBreed2018.matrix3)
 mean(degreeNonBreed2018.adj)
 #11
 
 set.seed(32)
 ggraph(g.NonBreed2018.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2018.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2018.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -7056,7 +7061,7 @@ melt(strength.NonBreed2018adj)%>%
   arrange(desc(strength.NonBreed2018adj))
 #SY_NET217   220
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonBreed2018 <- closeness(g.NonBreed2018.matrix3, vids = V(g.NonBreed2018.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -7077,9 +7082,9 @@ gNonBreed2018.ec <- eigen_centrality(g.NonBreed2018.matrix3, directed = FALSE)
 mean(gNonBreed2018.ec$vector)
 #0.744865
 
-which.max(gNonBreed2018.ec$vector) 
-#SY_NET217 
-#10 
+which.max(gNonBreed2018.ec$vector)
+#SY_NET217
+#10
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -7135,14 +7140,14 @@ gorder(g.Winter2018.matrix3)
 gsize(g.Winter2018.matrix3)
 #50
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter2018.adj <- degree(g.Winter2018.matrix3)
 mean(degreeWinter2018.adj)
 #7.142857
 
 set.seed(32)
 ggraph(g.Winter2018.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2018.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2018.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -7162,7 +7167,7 @@ melt(strength.Winter2018adj)%>%
   arrange(desc(strength.Winter2018adj))
 #ZM_SAND17    63
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter2018.adj <- closeness(g.Winter2018.matrix3, vids = V(g.Winter2018.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -7183,9 +7188,9 @@ gWinter2018.ec <- eigen_centrality(g.Winter2018.matrix3, directed = FALSE)
 mean(gWinter2018.ec$vector)
 #0.5634307
 
-which.max(gWinter2018.ec$vector) 
-#ZM_SAND17 
-#14 
+which.max(gWinter2018.ec$vector)
+#ZM_SAND17
+#14
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -7241,14 +7246,14 @@ gorder(g.NonBreed2019.matrix3)
 gsize(g.NonBreed2019.matrix3)
 # 28
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeNonBreed2019.adj <- degree(g.NonBreed2019.matrix3)
 mean(degreeNonBreed2019.adj)
 #7
 
 set.seed(32)
 ggraph(g.NonBreed2019.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2019.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeNonBreed2019.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -7268,7 +7273,7 @@ melt(strength.NonBreed2019adj)%>%
   arrange(desc(strength.NonBreed2019adj))
 #UA_NET119    81
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessNonBreed2019 <- closeness(g.NonBreed2019.matrix3, vids = V(g.NonBreed2019.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -7289,9 +7294,9 @@ gNonBreed2019.ec <- eigen_centrality(g.NonBreed2019.matrix3, directed = FALSE)
 mean(gNonBreed2019.ec$vector)
 #0.8385192
 
-which.max(gNonBreed2019.ec$vector) 
-#UA_NET119 
-#6 
+which.max(gNonBreed2019.ec$vector)
+#UA_NET119
+#6
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -7347,14 +7352,14 @@ gorder(g.Winter2019.matrix3)
 gsize(g.Winter2019.matrix3)
 #35
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter2019.adj <- degree(g.Winter2019.matrix3)
 mean(degreeWinter2019.adj)
 #7
 
 set.seed(32)
 ggraph(g.Winter2019.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2019.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2019.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -7374,7 +7379,7 @@ melt(strength.Winter2019adj)%>%
   arrange(desc(strength.Winter2019adj))
 #ZM_SAND17    75
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter2019.adj <- closeness(g.Winter2019.matrix3, vids = V(g.Winter2019.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -7395,9 +7400,9 @@ gWinter2019.ec <- eigen_centrality(g.Winter2019.matrix3, directed = FALSE)
 mean(gWinter2019.ec$vector)
 # 0.6422334
 
-which.max(gWinter2019.ec$vector) 
-#ZM_SAND17 
-#10 
+which.max(gWinter2019.ec$vector)
+#ZM_SAND17
+#10
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
@@ -7470,14 +7475,14 @@ gorder(g.Winter2020.matrix3)
 gsize(g.Winter2020.matrix3)
 #18
 
-##Degree:the number of nodes at distance 1 
+##Degree:the number of nodes at distance 1
 degreeWinter2020.adj <- degree(g.Winter2020.matrix3)
 mean(degreeWinter2020.adj)
 # 5.142857
 
 set.seed(32)
 ggraph(g.Winter2020.matrix3, layout = "nicely") +
-  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2020.adj), 
+  geom_edge_link(aes(alpha= weight), color = "darkblue") + geom_node_point(aes(size=degreeWinter2020.adj),
                                                                            fill= "darkslategrey",
                                                                            color = "red", shape =21) +
   geom_node_text(aes(label = name), fontface= "bold", size=4, repel = TRUE) +
@@ -7497,7 +7502,7 @@ melt(strength.Winter2020adj)%>%
   arrange(desc(strength.Winter2020adj))
 #SY_NET217    47
 
-##Closeness: how many steps are required to access every other node from a given node 
+##Closeness: how many steps are required to access every other node from a given node
 #how long info takes to arrive
 closenessWinter2020.adj <- closeness(g.Winter2020.matrix3, vids = V(g.Winter2020.matrix3), weights = NULL, normalized = FALSE)
 #AVERAGE of Closeness
@@ -7518,9 +7523,9 @@ gWinter2020.ec <- eigen_centrality(g.Winter2020.matrix3, directed = FALSE)
 mean(gWinter2020.ec$vector)
 #0.7880182
 
-which.max(gWinter2020.ec$vector) 
-#SY_NET217 
-#5 
+which.max(gWinter2020.ec$vector)
+#SY_NET217
+#5
 
 ##Network Diameter
 #the length of the longest path (in number of edges) between 2 nodes
