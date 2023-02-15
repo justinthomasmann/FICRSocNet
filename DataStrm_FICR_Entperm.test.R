@@ -1,6 +1,8 @@
 library(tidyverse)
 library(dplyr)
 library(asnipe)
+library(DescTools)#calculate Entropy
+library(sna)#calculate network metrics
 
 #group_maker1 uses two separate dataframes: ids (id1, id2) and obs (day1-4)
 
@@ -14,7 +16,7 @@ group_maker <- function(x){
 }
 
 #Read in our data data
-df <- read.csv("Global FicrSocNet.csv", sep = ",", header=TRUE, check.names = F)
+df <- read.csv("GlobalFicrSocNet.csv", sep = ",", header=TRUE, check.names = F)
 
 #Replace NAs with 0
 df[is.na(df)] <- 0
@@ -50,12 +52,10 @@ ficr.network <- get_network(ficr.gbi, data_format = "GBI", association_index = "
 #Permute our gbi 10000 times (individual A from Day 1 is swapped with Individual B from Day 2 = 1 permutation...run that 10000 times)
 
 
-ficr.network_permuted <- network_permutation(ficr.gbi, data_format = "GBI", 
+ficr.network_permuted <- network_permutation(ficr.gbi, data_format = "GBI",
                                               association_matrix = ficr.network, permutations = 100000,
                                               returns=1, association_index = "SRI")
 
-#Load "SNA" to calculate network metrics
-library(sna)
 
 #calculate weighted degree (number of times and individual associated with someone) for our REAL Network
 
@@ -85,7 +85,7 @@ abline(v=mean(ficr.deg_weighted), col = "red") #add a line for the mean of our r
 # Our real network should have a lower entropy than the permuted networks
 # The CV of strengths of Associations should be higher in our real network than in the permuted networks
 
-#Calculate the total CV of strengths 
+#Calculate the total CV of strengths
 cv<-function(x){return(sd(x)/mean(x))}
 
 
@@ -104,11 +104,6 @@ perm.cv
 
 #see SNA_functions_code in Gomes et al. 2020 (network structure)
 
-
-#To calculate Entropy
-#Load DescTools
-
-library(DescTools)
 
 #use 'Entropy()' function in DescTools
 #Calculate the Entropy of our real network
@@ -133,12 +128,13 @@ perm.Ent
 #################################################### I HAVE NOT TESTED THIS (CURRENT TIME: 11:39 PM)############################################
 ######################################### THE FOLLOWING LINES ARE FROM THE ABOVE PAPER AND HOW THEY MEASURED ENT/CV ON PERMS ###################
 
-# permute the data to obtain the expected values of pairwise co-occurrences under the hypothesis of random associations 
+# permute the data to obtain the expected values of pairwise co-occurrences under the hypothesis of random associations
 
 datastream_randomizations <- network_permutation(ficr.gbi, data_format = "GBI", permutations = 100000, returns = 1, association_index = "SRI",
-                                                 association_matrix = ficr.network, identities = colnames(ficr.gbi)) 
+                                                 association_matrix = ficr.network, identities = colnames(ficr.gbi))
 
-datastream_randomizations<-datastream_randomizations[seq(100, 100000, by=100),,] # select the permutations every 100 swaps
+#Justin restricted second argument in seq. Original was datastream_randomizations[seq(100, 100000, by=100),,]
+datastream_randomizations<-datastream_randomizations[seq(100, 1000, by=100),,] # select the permutations every 100 swaps
 
 gc() #calls garbage collector: useful after a large object has been removed--gives breakdown of memory usage
 
@@ -154,7 +150,7 @@ true_results<-rbind(real.net.CV, real.Ent)
 
 #Left off on line 140 of "simulations_code.R"
 
-# randomly pick a set of K group observations 
+# randomly pick a set of K group observations
 # creating random subsets of the gbi_matrix with k social groupings
 
 random_results<-matrix() # create matrix to register results from this replicate
@@ -162,29 +158,28 @@ random_results<-matrix() # create matrix to register results from this replicate
 
 temp_random_results<-data.frame() # create a matrix to register temporary results
 
-  
-  for (y in 1:length(datastream_randomizations)){ # for each replicate of the sub-sampling processs
-    
+
+  for (y in 1:length(datastream_randomizations)){ # for each replicate of the sub-sampling process
+
     # select random social groupings
-    groups_selected<-sample(1:ficr.gbi, replace=F) # without replacement
+    groups_selected<-sample(1:nrow(ficr.gbi), replace=F) # without replacement
     gbi_random<-ficr.gbi[c(groups_selected),]
-    
+
     # gbi_random<-gbi_random[, colSums(ficr.gbi) !=0] # remove individuals that were never selected in these selected clusters
-    
+
     # create the new network according to the randomly selected social groupings
-    network_random<-get_network(ficr.gbi, data_format = "GBI", association_index = "SRI") 
-    
+    network_random<-get_network(gbi_random, data_format = "GBI", association_index = "SRI")
+
     # calculate the new statistics for each randomly selected social grouping
     # cv
     random_cv<-cv(network_random)
-    
+
     # entropy
     random_entropy<-Entropy(network_random, base=2)
-    
+
     # register temporary results in the matrix
     options(scipen=999)
     temp_random_results<-rbind(temp_random_results, cbind(random_cv, random_entropy))
-    
+
   }
-  
-  
+
