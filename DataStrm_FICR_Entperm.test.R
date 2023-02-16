@@ -134,7 +134,7 @@ datastream_randomizations <- network_permutation(ficr.gbi, data_format = "GBI", 
                                                  association_matrix = ficr.network, identities = colnames(ficr.gbi))
 
 #Justin restricted second argument in seq. Original was datastream_randomizations[seq(100, 100000, by=100),,]
-datastream_randomizations<-datastream_randomizations[seq(100, 1000, by=100),,] # select the permutations every 100 swaps
+datastream_randomizations<-datastream_randomizations[seq(20, 1000, by=20),,] # select the permutations every 100 swaps
 
 gc() #calls garbage collector: useful after a large object has been removed--gives breakdown of memory usage
 
@@ -155,17 +155,21 @@ true_results<-rbind(real.net.CV, real.Ent)
 
 random_results<-matrix() # create matrix to register results from this replicate
 
-
 temp_random_results<-data.frame() # create a matrix to register temporary results
 
+#####Here is the start of Cristina's loop to calculate permuted entropy and CV of strength####
 
-  for (y in 1:length(datastream_randomizations)){ # for each replicate of the sub-sampling process
+for (z in 1:length(k_groups)){ # for each number of K group observations defined in the function argument 'k_groups'
+
+  temp_random_results<-data.frame() # create a matrix to register temporary results
+
+  for (y in 1:100){ # for each replicate of the sub-sampling processs
 
     # select random social groupings
-    groups_selected<-sample(1:nrow(ficr.gbi), replace=F) # without replacement
-    gbi_random<-ficr.gbi[c(groups_selected),]
+    groups_selected<-sample(1:social_groupings, size=k_groups[z], replace=F) # without replacement
+    gbi_random<-gbi_matrix[c(groups_selected),]
 
-    # gbi_random<-gbi_random[, colSums(ficr.gbi) !=0] # remove individuals that were never selected in these selected clusters
+    gbi_random<-gbi_random[, colSums(gbi_random) !=0] # remove individuals that were never selected in these selected clusters
 
     # create the new network according to the randomly selected social groupings
     network_random<-get_network(gbi_random, data_format = "GBI", association_index = "SRI")
@@ -174,12 +178,79 @@ temp_random_results<-data.frame() # create a matrix to register temporary result
     # cv
     random_cv<-cv(network_random)
 
+    # SD
+    random_sd<-sd(network_random)
+
+    # S (Bejder, flercher & Bräger 1998)
+    # reduce expected values matrix to the same individuals present in the gbi random
+    expected_values_random<-expected_values[rownames(expected_values) %in% colnames(gbi_random), colnames(expected_values) %in% colnames(gbi_random)]
+
+    options(scipen=999)
+    a<-network_random-expected_values_random
+    a<-a^2
+    num_dyads<-ncol(network_random)*(ncol(network_random)-1)
+    a<-a/num_dyads
+    random_S<-sum(a)
+
     # entropy
     random_entropy<-Entropy(network_random, base=2)
 
     # register temporary results in the matrix
     options(scipen=999)
-    temp_random_results<-rbind(temp_random_results, cbind(random_cv, random_entropy))
+    temp_random_results<-rbind(temp_random_results, cbind(random_sd, random_cv, random_S, random_entropy))
 
   }
 
+  # add to column names the reference of K group observations selected
+  colnames(temp_random_results)<-c(paste(k_groups[z], colnames(temp_random_results), sep="_"))
+
+  # join the temporary results to the result matrix
+  random_results<-cbind(random_results, temp_random_results)
+
+  print(paste(k_groups[z], " group observations ran"))
+  gc()
+}
+
+# remove first column (null column)
+random_results<-random_results[,-1]
+
+# join result matrix to final list of results
+random_results_list[[w]]<-random_results
+print(paste(w, "_replicate_done"))
+}
+
+return(list(true_results = true_results_list, random_results=random_results_list))
+}
+
+
+
+
+
+
+
+
+
+  # for (y in 1:length(datastream_randomizations)){ # for each replicate of the sub-sampling process
+  #
+  #   # select random social groupings
+  #   groups_selected<-sample(1:nrow(ficr.gbi), replace=F) # without replacement
+  #   gbi_random<-ficr.gbi[c(groups_selected),]
+  #
+  #   # gbi_random<-gbi_random[, colSums(ficr.gbi) !=0] # remove individuals that were never selected in these selected clusters
+  #
+  #   # create the new network according to the randomly selected social groupings
+  #   network_random<-get_network(gbi_random, data_format = "GBI", association_index = "SRI")
+  #
+  #   # calculate the new statistics for each randomly selected social grouping
+  #   # cv
+  #   random_cv<-cv(network_random)
+  #
+  #   # entropy
+  #   random_entropy<-Entropy(network_random, base=2)
+  #
+  #   # register temporary results in the matrix
+  #   options(scipen=999)
+  #   temp_random_results<-rbind(temp_random_results, cbind(random_cv, random_entropy))
+  #
+  # }
+  #
