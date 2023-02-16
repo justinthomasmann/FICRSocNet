@@ -25,6 +25,9 @@ df[is.na(df)] <- 0
 ids <- df[,1:3]
 obs <- df[,4:ncol(df)]
 
+#Number of unique ids in the dataset
+df %>% summarise(n_unique = n_distinct(unlist(across(id1:id2)))) #33 birds
+
 # it works
 group_maker(4)
 

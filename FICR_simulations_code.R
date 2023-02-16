@@ -15,7 +15,7 @@
 #
 #
 
-sim_net_stat_robustness<-function(N=40, k_groups=c(300, 150, 70, 35), social_groupings=20000, network_structure="more", replicates=10, I=10, D=10){
+sim_net_stat_robustness<-function(N=33, social_groupings=366, network_structure="more", replicates=10, I=10, D=10){
 
   # This function corresponds to the simulations described in the materials and methods section "Simulated networks and robustness of descriptive statistics"
   # To run each type of simulation (more structured or less structured networks), the argument 'network_structure' of the function should be chosen ('more' or 'less', respectively)
@@ -107,7 +107,7 @@ sim_net_stat_robustness<-function(N=40, k_groups=c(300, 150, 70, 35), social_gro
     network<-get_network(gbi_matrix, data_format = "GBI", association_index = "SRI")
 
 
-    # Calculate the "true" estatistics for the network
+    # Calculate the "true" statistics for the network
 
     # cv
     true_cv<-cv(network)
@@ -151,10 +151,6 @@ sim_net_stat_robustness<-function(N=40, k_groups=c(300, 150, 70, 35), social_gro
     random_results<-matrix() # create matrix to register results from this replicate
 
 
-    for (z in 1:length(k_groups)){ # for each number of K group observations defined in the function argument 'k_groups'
-
-      temp_random_results<-data.frame() # create a matrix to register temporary results
-
       for (y in 1:100){ # for each replicate of the sub-sampling processs
 
         # select random social groupings
@@ -193,15 +189,7 @@ sim_net_stat_robustness<-function(N=40, k_groups=c(300, 150, 70, 35), social_gro
 
       }
 
-      # add to column names the reference of K group observations selected
-      colnames(temp_random_results)<-c(paste(k_groups[z], colnames(temp_random_results), sep="_"))
 
-      # join the temporary results to the result matrix
-      random_results<-cbind(random_results, temp_random_results)
-
-      print(paste(k_groups[z], " group observations ran"))
-      gc()
-    }
 
     # remove first column (null column)
     random_results<-random_results[,-1]
@@ -213,3 +201,4 @@ sim_net_stat_robustness<-function(N=40, k_groups=c(300, 150, 70, 35), social_gro
 
   return(list(true_results = true_results_list, random_results=random_results_list))
 }
+sim_net_stat_robustness(ficr.gbi)
