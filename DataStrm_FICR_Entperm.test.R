@@ -4,6 +4,8 @@ library(asnipe)
 library(DescTools)#calculate Entropy
 library(sna)#calculate network metrics
 
+?network_swap()
+
 #group_maker1 uses two separate dataframes: ids (id1, id2) and obs (day1-4)
 
 #converts our data in 'asnipe' format data
@@ -48,6 +50,121 @@ ficr.gbi <- get_group_by_individual(gbiList, data_format = "groups")
 #Create an association matrix from the GBI matrix and calculate "SRI" values
 
 ficr.network <- get_network(ficr.gbi, data_format = "GBI", association_index = "SRI")
+
+
+#####100 permutations#####
+gbi_swapped<-list()
+
+
+cv<-function(x){return(sd(x)/mean(x))}
+cvs <- rep(NA,100)
+network_perm <- list(ficr.network, ficr.gbi)
+
+# make a permutation (1 swap) to the GBI data
+
+#for (i in 1:1000) {
+
+for (i in 1:100) {
+  network_perm <- network_swap(network_perm[[2]], swaps = 1, association_matrix = network_perm[[1]])
+  cvs[i] <- cv(network_perm[[1]])
+}
+cvs
+
+#}
+
+# plot the results with the original network as a red dot
+plot(cvs,pch=20,cex=0.5)
+points(0,cv(ficr.network),cex=1,pch=20,col="red")
+
+
+
+
+ficr.permuter <- for(i in 1:permutation_number){
+      if(i==1){ # for the first permutation, consider the original GBI matrix
+
+        # make a permutation (1 swap) to the GBI data
+        gbi_swap_temp <- network_swap(association_data = ficr.gbi, association_matrix = ficr.network, association_index = "SRI", swaps = 1)
+
+
+      }
+
+      else{ # for the remaining permutations, consider always the previous permutated GBI matrix
+        # register the GBI data from the previous permutation
+        gbi_swap_temp<-gbi_swap_temp$Association_data
+
+        # permute again the GBI data
+        gbi_swap_temp<-network_swap(association_data = gbi_swap_temp$Association_data, association_matrix = gbi_swap_temp$Association_index, swaps = 1)
+
+        # register the GBI data at every 100 cumulative permutations, to allow posteriously, the calculation of a network based on counts of co-occurrence
+        if(i/100==floor(i/100)) {
+          gbi_swapped[[i/100]]<-gbi_swap_temp$Association_data
+        }
+
+
+        }
+         print(paste(i, "swap", sep="--")) # print permutation number, to check the evolution of the run
+
+      return(gbi_swapped=gbi_swapped)
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####asnipe - network_swap example code#####
+
+#library(raster)
+permutation_number <- 100
+cvs <- rep(NA,1000)
+cv<-function(x){return(sd(x)/mean(x))}
+network_perm = list(ficr.network,ficr.gbi)
+
+for(i in 1:permutation_number){
+  if(i==1){ # for the first permutation, consider the original GBI matrix
+  network_perm <- network_swap(ficr.gbi, swaps=1,
+                               association_matrix=ficr.network)
+  }
+
+  else{ # for the remaining permutations, consider always the previous permutated GBI matrix
+    # register the GBI data from the previous permutation
+    gbi_swap_temp_previous<-network_perm$Association_data
+
+    # permute again the GBI data
+    gbi_swap_temp<-network_swap(association_data = network_perm$Association_data, association_matrix = gbi_swap_temp$Association_index, swaps = 1)
+
+    # register the GBI data at every 100 cumulative permutations, to allow posteriously, the calculation of a network based on counts of co-occurrence
+    if(i/100==floor(i/100)) {
+      gbi_swapped[[i/100]]<-gbi_swap_temp$Association_data
+}
+}
+}
+# plot the results with the original network as a red dot
+plot(cvs,pch=20,cex=0.5)
+points(0,cv(network),cex=1,pch=20,col="red")
+
+
+
+
+
 
 
 #######################################PERFORM DATA-STREAM PERMUTATIONS################################################################
