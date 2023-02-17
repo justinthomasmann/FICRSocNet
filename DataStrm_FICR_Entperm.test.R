@@ -3,7 +3,7 @@ library(dplyr)
 library(asnipe)
 library(DescTools)#calculate Entropy
 library(sna)#calculate network metrics
-
+theme_set(theme_classic())
 ?network_swap()
 
 #group_maker1 uses two separate dataframes: ids (id1, id2) and obs (day1-4)
@@ -51,326 +51,53 @@ ficr.gbi <- get_group_by_individual(gbiList, data_format = "groups")
 
 ficr.network <- get_network(ficr.gbi, data_format = "GBI", association_index = "SRI")
 
+true.ent <- Entropy(ficr.network)
+true.cv <- cv(ficr.network)
 
-#####100 permutations#####
-gbi_swapped<-list()
-
+#####100000permutations#####
 
 cv<-function(x){return(sd(x)/mean(x))}
 cvs <- rep(NA,100)
+ent <- rep(NA,100)
+
 network_perm <- list(ficr.network, ficr.gbi)
 
 # make a permutation (1 swap) to the GBI data
 
-#for (i in 1:1000) {
-
-for (i in 1:100) {
+for (i in 1:100000) {
   network_perm <- network_swap(network_perm[[2]], swaps = 1, association_matrix = network_perm[[1]])
   cvs[i] <- cv(network_perm[[1]])
+  ent[i] <- Entropy(network_perm[[1]], base =2)
 }
 cvs
+ent
 
-#}
+cvs.burned <- cvs[10001:length(cvs)]
+ent.burned <- ent[10001:length(ent)]
+plot.df <- data.frame(rep(NA,90000))
+plot.df$cvs <- cvs.burned
+plot.df$ent <- ent.burned
+
+#histogram of permuted cv after 10,000 burn-ins
+ggplot(data = plot.df)+
+  geom_histogram(aes(x=cvs), bins = 300, fill = "white", color = "black")+
+  xlim(0.8,1.1)+
+  geom_vline(xintercept = true.cv, color = "red")
+
+#histogram of permuted ent after 10,000 burn-ins
+ggplot(data = plot.df)+
+  geom_histogram(aes(x=ent), bins = 300, fill = "white", color = "black")+
+  xlim(8.8,9.3)+
+  geom_vline(xintercept = true.ent, color = "red")
+
 
 # plot the results with the original network as a red dot
 plot(cvs,pch=20,cex=0.5)
 points(0,cv(ficr.network),cex=1,pch=20,col="red")
 
-
-
-
-ficr.permuter <- for(i in 1:permutation_number){
-      if(i==1){ # for the first permutation, consider the original GBI matrix
-
-        # make a permutation (1 swap) to the GBI data
-        gbi_swap_temp <- network_swap(association_data = ficr.gbi, association_matrix = ficr.network, association_index = "SRI", swaps = 1)
-
-
-      }
-
-      else{ # for the remaining permutations, consider always the previous permutated GBI matrix
-        # register the GBI data from the previous permutation
-        gbi_swap_temp<-gbi_swap_temp$Association_data
-
-        # permute again the GBI data
-        gbi_swap_temp<-network_swap(association_data = gbi_swap_temp$Association_data, association_matrix = gbi_swap_temp$Association_index, swaps = 1)
-
-        # register the GBI data at every 100 cumulative permutations, to allow posteriously, the calculation of a network based on counts of co-occurrence
-        if(i/100==floor(i/100)) {
-          gbi_swapped[[i/100]]<-gbi_swap_temp$Association_data
-        }
-
-
-        }
-         print(paste(i, "swap", sep="--")) # print permutation number, to check the evolution of the run
-
-      return(gbi_swapped=gbi_swapped)
-
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#####asnipe - network_swap example code#####
-
-#library(raster)
-permutation_number <- 100
-cvs <- rep(NA,1000)
-cv<-function(x){return(sd(x)/mean(x))}
-network_perm = list(ficr.network,ficr.gbi)
-
-for(i in 1:permutation_number){
-  if(i==1){ # for the first permutation, consider the original GBI matrix
-  network_perm <- network_swap(ficr.gbi, swaps=1,
-                               association_matrix=ficr.network)
-  }
-
-  else{ # for the remaining permutations, consider always the previous permutated GBI matrix
-    # register the GBI data from the previous permutation
-    gbi_swap_temp_previous<-network_perm$Association_data
-
-    # permute again the GBI data
-    gbi_swap_temp<-network_swap(association_data = network_perm$Association_data, association_matrix = gbi_swap_temp$Association_index, swaps = 1)
-
-    # register the GBI data at every 100 cumulative permutations, to allow posteriously, the calculation of a network based on counts of co-occurrence
-    if(i/100==floor(i/100)) {
-      gbi_swapped[[i/100]]<-gbi_swap_temp$Association_data
-}
-}
-}
-# plot the results with the original network as a red dot
-plot(cvs,pch=20,cex=0.5)
-points(0,cv(network),cex=1,pch=20,col="red")
-
-
-
-
-
-
-
-#######################################PERFORM DATA-STREAM PERMUTATIONS################################################################
-
-#Permute our gbi 10000 times (individual A from Day 1 is swapped with Individual B from Day 2 = 1 permutation...run that 10000 times)
-
-
-ficr.network_permuted <- network_permutation(ficr.gbi, data_format = "GBI",
-                                              association_matrix = ficr.network, permutations = 100000,
-                                              returns=1, association_index = "SRI")
-
-
-#calculate weighted degree (number of times and individual associated with someone) for our REAL Network
-
-ficr.deg_weighted <- degree(ficr.network, gmode = "graph", g = 1, ignore.eval = FALSE)
-ficr.deg_weighted
-
-#Calculate the degree for each one of the 10000 permuted networks
-
-ficr.perm.deg_weighted <- degree(ficr.network_permuted, gmode = "graph", g=c(1:100000),
-                                 ignore.eval = FALSE)
-
-ficr.perm.deg_weighted
-
-# Plot these results on a nice little histogram
-
-#plot the distribution of weighted degrees generated by the permutation process
-hist(colMeans(ficr.perm.deg_weighted), breaks = 100, main = paste("P=", sum(mean(ficr.deg_weighted)
-                                       < colMeans(ficr.perm.deg_weighted))/ncol(ficr.perm.deg_weighted)),
-                                        xlab = "Weighted Degree", ylab = "Probability")
-
-abline(v=mean(ficr.deg_weighted), col = "red") #add a line for the mean of our real networks weighted degree value
-
-
-####################################MOVING FORWARD########################################
-
-#We need to calculate either the entropy or the CV of strengths for each of the permuted networks and see where our observed value falls
-# Our real network should have a lower entropy than the permuted networks
-# The CV of strengths of Associations should be higher in our real network than in the permuted networks
-
-#Calculate the total CV of strengths
-cv<-function(x){return(sd(x)/mean(x))}
-
-
-#CV of strength in our real network
-real.net.CV <- cv(ficr.network)
-real.net.CV
-#[1] 1.091865
-
-
-#try calculating CV for each individual network in the matrix of permuted networks
-
-perm.cv <- cv(ficr.network_permuted)
-perm.cv
-#0.849 (this does it to all of them) I think a for.loop is needed to loop it through all of them
-
-
-#see SNA_functions_code in Gomes et al. 2020 (network structure)
-
-
-#use 'Entropy()' function in DescTools
-#Calculate the Entropy of our real network
-
-real.Ent <- Entropy(ficr.network, base =2)
-real.Ent
-#[1] 8.862964
-
-# Try on our permuted network
-
-perm.Ent <- Entropy(ficr.network_permuted, base = 2)
-perm.Ent
-#[1] 25.82692
-
-#Maybe build a for loop, that does 1 permutation, counts the entropy, then does a second, counts entropy...etc. x 10000
-#I'm not sure how we can get it to do Entropy individually for each as it seems like the function is treating the permuted network
-#as the final product of 100k permutations (as opposed to calculating it after each one)
-
-#Review "simulations_code" Line 110 from Gomes et al. "Network Structure" 2020
-
-
-#################################################### I HAVE NOT TESTED THIS (CURRENT TIME: 11:39 PM)############################################
-######################################### THE FOLLOWING LINES ARE FROM THE ABOVE PAPER AND HOW THEY MEASURED ENT/CV ON PERMS ###################
-
-# permute the data to obtain the expected values of pairwise co-occurrences under the hypothesis of random associations
-
-datastream_randomizations <- network_permutation(ficr.gbi, data_format = "GBI", permutations = 100000, returns = 1, association_index = "SRI",
-                                                 association_matrix = ficr.network, identities = colnames(ficr.gbi))
-
-#Justin restricted second argument in seq. Original was datastream_randomizations[seq(100, 100000, by=100),,]
-datastream_randomizations<-datastream_randomizations[seq(20, 1000, by=20),,] # select the permutations every 100 swaps
-
-gc() #calls garbage collector: useful after a large object has been removed--gives breakdown of memory usage
-
-# mean of the corresponding pairwise values obtained from randomly generated networks
-expected_values<-apply(datastream_randomizations, c(2,3), mean)
-colnames(expected_values)<-colnames(ficr.gbi)
-rownames(expected_values)<-colnames(ficr.gbi)
-
-
-# register results in a matrix
-options(scipen=999)
-true_results<-rbind(real.net.CV, real.Ent)
-
-#Left off on line 140 of "simulations_code.R"
-
-# randomly pick a set of K group observations
-# creating random subsets of the gbi_matrix with k social groupings
-
-random_results<-matrix() # create matrix to register results from this replicate
-
-temp_random_results<-data.frame() # create a matrix to register temporary results
-
-#####Here is the start of Cristina's loop to calculate permuted entropy and CV of strength####
-
-for (z in 1:length(k_groups)){ # for each number of K group observations defined in the function argument 'k_groups'
-
-  temp_random_results<-data.frame() # create a matrix to register temporary results
-
-  for (y in 1:100){ # for each replicate of the sub-sampling processs
-
-    # select random social groupings
-    groups_selected<-sample(1:social_groupings, size=k_groups[z], replace=F) # without replacement
-    gbi_random<-gbi_matrix[c(groups_selected),]
-
-    gbi_random<-gbi_random[, colSums(gbi_random) !=0] # remove individuals that were never selected in these selected clusters
-
-    # create the new network according to the randomly selected social groupings
-    network_random<-get_network(gbi_random, data_format = "GBI", association_index = "SRI")
-
-    # calculate the new statistics for each randomly selected social grouping
-    # cv
-    random_cv<-cv(network_random)
-
-    # SD
-    random_sd<-sd(network_random)
-
-    # S (Bejder, flercher & Bräger 1998)
-    # reduce expected values matrix to the same individuals present in the gbi random
-    expected_values_random<-expected_values[rownames(expected_values) %in% colnames(gbi_random), colnames(expected_values) %in% colnames(gbi_random)]
-
-    options(scipen=999)
-    a<-network_random-expected_values_random
-    a<-a^2
-    num_dyads<-ncol(network_random)*(ncol(network_random)-1)
-    a<-a/num_dyads
-    random_S<-sum(a)
-
-    # entropy
-    random_entropy<-Entropy(network_random, base=2)
-
-    # register temporary results in the matrix
-    options(scipen=999)
-    temp_random_results<-rbind(temp_random_results, cbind(random_sd, random_cv, random_S, random_entropy))
-
-  }
-
-  # add to column names the reference of K group observations selected
-  colnames(temp_random_results)<-c(paste(k_groups[z], colnames(temp_random_results), sep="_"))
-
-  # join the temporary results to the result matrix
-  random_results<-cbind(random_results, temp_random_results)
-
-  print(paste(k_groups[z], " group observations ran"))
-  gc()
-}
-
-# remove first column (null column)
-random_results<-random_results[,-1]
-
-# join result matrix to final list of results
-random_results_list[[w]]<-random_results
-print(paste(w, "_replicate_done"))
-}
-
-return(list(true_results = true_results_list, random_results=random_results_list))
-}
-
-
-
-
-
-
-
-
-
-  # for (y in 1:length(datastream_randomizations)){ # for each replicate of the sub-sampling process
-  #
-  #   # select random social groupings
-  #   groups_selected<-sample(1:nrow(ficr.gbi), replace=F) # without replacement
-  #   gbi_random<-ficr.gbi[c(groups_selected),]
-  #
-  #   # gbi_random<-gbi_random[, colSums(ficr.gbi) !=0] # remove individuals that were never selected in these selected clusters
-  #
-  #   # create the new network according to the randomly selected social groupings
-  #   network_random<-get_network(gbi_random, data_format = "GBI", association_index = "SRI")
-  #
-  #   # calculate the new statistics for each randomly selected social grouping
-  #   # cv
-  #   random_cv<-cv(network_random)
-  #
-  #   # entropy
-  #   random_entropy<-Entropy(network_random, base=2)
-  #
-  #   # register temporary results in the matrix
-  #   options(scipen=999)
-  #   temp_random_results<-rbind(temp_random_results, cbind(random_cv, random_entropy))
-  #
-  # }
-  #
+plot(ent,pch=20,cex=0.5)
+points(0,Entropy(ficr.network),cex=1,pch=20,col="red")
+
+hist(cvs, Bins= 0.0)
+length(cvs)
+?hist()
